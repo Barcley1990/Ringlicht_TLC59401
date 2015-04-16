@@ -1,4 +1,3 @@
-
 /*
  * A_Ringlicht.ino
  *
@@ -6,7 +5,9 @@
  * Author: Tobias Nuss
  */ 
 
-#include "tre.h"
+#include "Driver.h"
+#include "Functions.h"
+
 
 // How many boards do you have chained?
 #define NUM_TLC5974 1
@@ -16,17 +17,14 @@
 #define latch    7//10
 #define oe  -1  // set to -1 to not use the enable pin (its optional)
 
-Adafruit_TLC5947 tlc = Adafruit_TLC5947(NUM_TLC5974, clock, data, latch);
-
-
-String inputString = "";         // a string to hold incoming data
-boolean stringComplete = false;  // whether the string is complete
+Driver tlc = Driver(NUM_TLC5974, clock, data, latch);
+Functions ser = Functions();
 
 void setup()
 {
 	Serial.begin(9600);
-	inputString.reserve(200);
-	
+	ser.m_inputString.reserve(200);
+
 	Serial.println("TLC5974 test");
 	tlc.begin();
 	if (oe >= 0)
@@ -40,121 +38,73 @@ void setup()
 	pinMode(2,OUTPUT);
 	digitalWrite(2,HIGH);
 	digitalWrite(3,LOW);
-	reset_all();
+	tlc.reset_all();
 }
-
-void loop()
-{
-	serial_call();
-}
-
-
-
-
-bool check_input()
-{	
-	const char *led = "LED";
-	const char *value = "VALUE";
-		
-	// check for 'LED'
-	for (int i=0; i<3; i++)
-	{
-		if (inputString[i] == *led )
-		{
-			led++;
-		}
-		else
-			return false;
-	}	
-	// check for 'VALUE'
-	for (int i=5; i<10; i++)
-	{
-		if (inputString[i] == *value )
-		{
-			value++;
-		}
-		else
-			return false;
-	}	
-	return true;
-}
-
-bool check_Reset()
-{
-	const char *reset = "RESET";
-	for (int i=0; i<5; i++)
-	{
-		if (inputString[i] == *reset )
-		{
-			reset++;
-		}
-		else
-			return false;
-	}
-	return true;
-}
-
 
 	
 char tmp_buffer[128];
 char *tmp_ptr = tmp_buffer;
-bool inputOk = false;
-	
-void serial_call()
-{
-	if (stringComplete)
-	{
-		Serial.print(inputString);
-		
-		if (check_Reset())
-		{
-			reset_all();
-			inputString = "";
-			stringComplete = false;
-			
-		}
-		
-		
-		// check if inputString == LEDxxVALUExxxx
-		if (check_input())
-		{
-			Serial.print("+");
-			inputOk = true;
-		}
-		else
-			Serial.print("-");
-		
-		if (inputOk)
-		{
-			// get Channel and Brightness
-			for(uint8_t i=0; i<=1; i++)
-			{
-				*tmp_ptr = inputString[i+3]; // umkopieren von Zeichen 3 & 4  aus s_buffer in tmp_buffer
-				tmp_ptr++;
-			}
-			for(uint8_t i=0; i<=3; i++)
-			{
-				*tmp_ptr = inputString[i+10]; // umkopieren von Zeichen 10 - 13  aus s_buffer in tmp_buffer
-				tmp_ptr++;
-			}
-			
-			uint32_t value = (uint32_t) atol(tmp_buffer);
-			uint8_t led = value / 10000;
-			uint16_t val = value - (led * 10000);
 
-			Serial.print(value);
-			Serial.print("\r");
+	
+void loop()
+{
+	if (ser.m_stringComplete)
+	{
+		Serial.print(ser.m_inputString);
+		
+		// check if RESET was insert
+		if (!ser.Check_Reset())
+		{	
+			// check if inputString == LEDxxVALUExxxx
+			if (ser.Check_Input())
+			{
+				Serial.print("+");
+				ser.m_inputOk = true;
+			}
+			else
+			{
+				Serial.print("-");
+				ser.m_inputOk = false;
+			}
+				
+			if (ser.m_inputOk)
+			{
+				// get Channel and Brightness
+				for(uint8_t i=0; i<=1; i++)
+				{
+					*tmp_ptr = ser.m_inputString[i+3]; // umkopieren von Zeichen 3 & 4  aus s_buffer in tmp_buffer
+					tmp_ptr++;
+				}
+				for(uint8_t i=0; i<=3; i++)
+				{
+					*tmp_ptr = ser.m_inputString[i+10]; // umkopieren von Zeichen 10 - 13  aus s_buffer in tmp_buffer
+					tmp_ptr++;
+				}
 			
-			// set LED
-			tlc.setPWM(led,val);
-			tlc.write();
+				uint32_t value = (uint32_t) atol(tmp_buffer);
+				uint8_t led = value / 10000;
+				uint16_t val = value - (led * 10000);
+
+				Serial.print(value);
+				Serial.print("\r");
+			
+				// set LED
+				tlc.setPWM(led,val);
+				tlc.write();
+			}
+			else  // wrong input
+				Serial.print("error\r");
+			
+			tmp_ptr = tmp_buffer;		
+			ser.m_inputString = "";
+			ser.m_stringComplete = false;
 		}
-		else
-			Serial.print("error\r");
-			
-		tmp_ptr = tmp_buffer;		
-		inputString = "";
-		stringComplete = false;
+		else // Reset
+		{
+			tlc.reset_all();
+			ser.m_inputString = "";
+			ser.m_stringComplete = false;			
+		}
 	}	
 }
 
@@ -165,20 +115,12 @@ void serialEvent()
 		// get the new byte:
 		char inChar = (char)Serial.read();
 		// add it to the inputString:
-		inputString += inChar;
+		ser.m_inputString += inChar;
 		// if the incoming character is a newline, set a flag
 		// so the main loop can do something about it:
 		if (inChar == '\n' || inChar == '\r') 
-			stringComplete = true;
+			ser.m_stringComplete = true;
 	}
 }
 
 
-void reset_all()
-{
-	for (int i=0; i<24; i++)
-	{
-		tlc.setPWM(i,0);
-	}
-	tlc.write();
-}

@@ -675,10 +675,16 @@ build.arch=AVR
     <Compile Include="A_Ringlicht.ino">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="tre.cpp">
+    <Compile Include="Functions.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="tre.h">
+    <Compile Include="Functions.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Driver.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Driver.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Visual Micro\.A_Ringlicht.vsarduino.h">

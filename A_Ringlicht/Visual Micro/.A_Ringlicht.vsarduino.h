@@ -17,16 +17,14 @@ extern "C" void __cxa_pure_virtual() {;}
 
 //
 //
-bool check_input();
-bool check_Reset();
-void serial_call();
 void serialEvent();
-void reset_all();
 
 #include "C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega\pins_arduino.h" 
 #include "C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino\arduino.h"
 #include <A_Ringlicht.ino>
+#include <Driver.cpp>
+#include <Driver.h>
+#include <Functions.cpp>
+#include <Functions.h>
 #include <dfg.cpp>
 #include <dfg.h>
-#include <tre.cpp>
-#include <tre.h>
