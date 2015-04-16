@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "A_Ringlicht", "A_Ringlicht\A_Ringlicht.cppproj", "{9828F962-558C-4BA0-AAC2-D5E3A7779FE8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9828F962-558C-4BA0-AAC2-D5E3A7779FE8}.Debug|AVR.ActiveCfg = Debug|AVR
+		{9828F962-558C-4BA0-AAC2-D5E3A7779FE8}.Debug|AVR.Build.0 = Debug|AVR
+		{9828F962-558C-4BA0-AAC2-D5E3A7779FE8}.Release|AVR.ActiveCfg = Release|AVR
+		{9828F962-558C-4BA0-AAC2-D5E3A7779FE8}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
