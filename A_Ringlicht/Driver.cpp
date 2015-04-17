@@ -1,10 +1,9 @@
 /*
- * CPPFile1.cpp
+ * Driver.cpp
  *
  * Created: 16.04.2015 11:38:27
  *  Author: Tobias Nuss
  */ 
-
 #include "Driver.h"
 
 // Constructor

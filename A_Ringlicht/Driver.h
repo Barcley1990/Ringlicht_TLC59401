@@ -1,11 +1,9 @@
 /*
- * IncFile1.h
+ * Driver.h
  *
  * Created: 16.04.2015 11:38:39
  *  Author: Tobias Nuss
  */ 
-
-
 #ifndef _ADAFRUIT_TLC5947_H
 #define _ADAFRUIT_TLC5947_H
 

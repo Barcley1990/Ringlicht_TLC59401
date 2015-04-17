@@ -1,12 +1,10 @@
 
 /*
- * IncFile1.h
+ * Functions.h
  *
  * Created: 16.04.2015 11:38:39
  *  Author: Tobias Nuss
  */ 
-
-
 #ifndef _FUNCTIONS_H
 #define _FUNCTIONS_H
 
@@ -18,16 +16,21 @@ public:
 	Functions();
 	bool Check_Input();
 	bool Check_Reset();
+	bool Check_LedValue();
 	
-	bool m_inputOk = false;
-	
+	// a string to hold incoming data
 	String m_inputString = "";  
-	
-	 // a string to hold incoming data
-	boolean m_stringComplete = false;  // whether the string is complete
-	
+	// whether the string is complete
+	boolean m_stringComplete = false;
+		
+	uint8_t m_led;
+	uint16_t m_val;
+		
 private:
-	
+	uint32_t m_value;
+	bool m_inputOk = false;
+	char m_tmp_buffer[128];
+	char *m_tmp_ptr = m_tmp_buffer;
 
 };
 
