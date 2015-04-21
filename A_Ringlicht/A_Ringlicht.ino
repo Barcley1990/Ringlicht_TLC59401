@@ -11,10 +11,12 @@
 // How many boards do you have chained?
 #define NUM_TLC5974 1
 
-#define data     4//13
-#define clock    5//12
-#define latch    7//10
-#define oe  -1  // set to -1 to not use the enable pin (its optional)
+#define data    5
+#define clock   4
+#define latch   2
+#define oe		-1	// set to -1 to not use the enable pin (its optional)
+#define supply	7	// V+
+#define gnd		6	// GND
 
 Driver tlc = Driver(NUM_TLC5974, clock, data, latch);
 Functions ser = Functions();
@@ -32,10 +34,6 @@ void setup()
 	}
 	Serial.println("Eingabe Erwartet:");
 	
-	pinMode(3, OUTPUT);
-	pinMode(2,OUTPUT);
-	digitalWrite(2,HIGH);
-	digitalWrite(3,LOW);
 	tlc.reset_all();
 }
 	

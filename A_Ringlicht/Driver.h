@@ -20,6 +20,7 @@ class Driver
 	void setPWM(uint8_t chan, uint16_t pwm);
 	void write(void);
 	void reset_all();
+	void full_brightness();
 
 
 private:

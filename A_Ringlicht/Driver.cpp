@@ -21,24 +21,27 @@ void Driver::write(void)
 {
 digitalWrite(_lat, LOW);
 	// 24 channels per TLC5974
-	for (int8_t c=24*numdrivers - 1; c>0 ; c--) 
+	for (int i=24*numdrivers - 1 ; i>0 ; i--) 
 	{
 		// 12 bits per channel, send MSB first
-		for (int8_t b=12; b>0; b--) 
+		for (int j=12; j>=0; j--) 
 		{
 			digitalWrite(_clk, LOW);
 			
-			if (pwmbuffer[c] & (1 << b))
+			if (pwmbuffer[i] & (1 << j))
+			{
 				digitalWrite(_dat, HIGH);
+			}
 			else
+			{
 				digitalWrite(_dat, LOW);
-
+			}
 			digitalWrite(_clk, HIGH);
 		}
 	}
   digitalWrite(_clk, LOW);
-  
-  digitalWrite(_lat, HIGH);  
+
+  digitalWrite(_lat, HIGH); 
   digitalWrite(_lat, LOW);
 }
 
@@ -68,4 +71,22 @@ void Driver::reset_all()
 		setPWM(i,0);
 	}
 	write();
+}
+void Driver::full_brightness()
+{
+	digitalWrite(_lat, LOW);
+	digitalWrite(_clk, LOW);
+	// 24 channels per TLC5974
+	for (int i=288; i>0 ; i--)
+	{
+			digitalWrite(_clk, LOW);
+			delay(1);
+			digitalWrite(_dat, HIGH);
+			delay(1);
+			digitalWrite(_clk, HIGH);	
+	}
+	digitalWrite(_clk, LOW);
+
+	digitalWrite(_lat, HIGH);
+	digitalWrite(_lat, LOW);
 }
