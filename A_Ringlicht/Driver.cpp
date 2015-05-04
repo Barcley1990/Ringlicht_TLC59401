@@ -24,7 +24,7 @@ digitalWrite(_lat, LOW);
 	for (int i=24*numdrivers - 1 ; i>0 ; i--) 
 	{
 		// 12 bits per channel, send MSB first
-		for (int j=12; j>=0; j--) 
+		for (int j=11; j>=0; j--) 
 		{
 			digitalWrite(_clk, LOW);
 			
@@ -48,8 +48,23 @@ digitalWrite(_lat, LOW);
 void Driver::setPWM(uint8_t chan, uint16_t pwm) 
 {
   if (pwm > 4095) pwm = 4095;
-  if (chan > 24*numdrivers) return;
-  pwmbuffer[chan] = pwm;  
+  if (chan > 8*numdrivers) return;
+  uint8_t ch=0;
+  switch(chan)
+  {
+	  case 1: ch = 1; break;
+	  case 2: ch = 4; break;
+	  case 3: ch = 7; break;
+	  case 4: ch = 10; break;
+	  case 5: ch = 13; break;
+	  case 6: ch = 16; break;
+	  case 7: ch = 19; break;
+	  case 8: ch = 22; break;
+	  default: Serial.print("Channel not available!\r"); break;
+  }
+  pwmbuffer[ch] = pwm;
+  pwmbuffer[ch+1] = pwm;
+  pwmbuffer[ch+2] = pwm; 
 }
 
 boolean Driver::begin() 
