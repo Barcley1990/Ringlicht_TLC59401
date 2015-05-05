@@ -21,7 +21,7 @@ void Driver::write(void)
 {
 digitalWrite(_lat, LOW);
 	// 24 channels per TLC5974
-	for (int i=24*numdrivers - 1 ; i>0 ; i--) 
+	for (int i=24*numdrivers-1; i>=0 ; i--) 
 	{
 		// 12 bits per channel, send MSB first
 		for (int j=11; j>=0; j--) 
@@ -49,17 +49,17 @@ void Driver::setPWM(uint8_t chan, uint16_t pwm)
 {
   if (pwm > 4095) pwm = 4095;
   if (chan > 8*numdrivers) return;
-  uint8_t ch=0;
+  uint8_t ch;
   switch(chan)
   {
-	  case 1: ch = 1; break;
-	  case 2: ch = 4; break;
-	  case 3: ch = 7; break;
-	  case 4: ch = 10; break;
-	  case 5: ch = 13; break;
-	  case 6: ch = 16; break;
-	  case 7: ch = 19; break;
-	  case 8: ch = 22; break;
+	  case 1: ch = 0; break;
+	  case 2: ch = 3; break;
+	  case 3: ch = 6; break;
+	  case 4: ch = 9; break;
+	  case 5: ch = 12; break;
+	  case 6: ch = 15; break;
+	  case 7: ch = 18; break;
+	  case 8: ch = 21; break;
 	  default: Serial.print("Channel not available!\r"); break;
   }
   pwmbuffer[ch] = pwm;
