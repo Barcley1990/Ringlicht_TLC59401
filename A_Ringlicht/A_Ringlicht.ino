@@ -23,7 +23,7 @@ Functions ser = Functions();
 
 void setup()
 {
-	Serial.begin(19200);
+	Serial.begin(56000);
 	
 	Serial.println("Ringlicht bereit!");
 	tlc.begin();
