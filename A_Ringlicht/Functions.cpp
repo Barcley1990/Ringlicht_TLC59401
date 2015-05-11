@@ -8,7 +8,7 @@
 
 Functions::Functions()
 {
-	m_inputString.reserve(1000);
+	m_inputString.reserve(5000);
 }
 
 bool Functions::Check_Input()

@@ -23,7 +23,7 @@ Functions ser = Functions();
 
 void setup()
 {
-	Serial.begin(56000);
+	Serial.begin(14400);
 	
 	Serial.println("Ringlicht bereit!");
 	tlc.begin();
@@ -41,15 +41,16 @@ void loop()
 {
 	if (ser.m_stringComplete)
 	{
-		Serial.print(ser.m_inputString);
-		
+		Serial.print("completed string arrived ");
 		// check if RESET was insert	
 		if (ser.Check_Reset())
-		{				
+		{			
+			Serial.print("+Reset\r");
 			tlc.reset_all();		
 		}		
 		else 
 		{	
+			Serial.print("no Reset ");
 			ser.Check_LedValue();
 			// set LED
 			tlc.setPWM(ser.m_led,ser.m_val);
@@ -74,3 +75,4 @@ void serialEvent()
 }
 
 
+// ToDo -> UART Timeout!
