@@ -7,8 +7,9 @@
 
 #include "PWM.h"
 
-PWM::PWM()
+PWM::PWM(int pwmPin)
 {
+	int m_pwmChannel = pwmPin;	
 
 }
 

@@ -23,7 +23,7 @@
 
 Driver tlc = Driver(NUM_TLC5974, clock, data, latch);
 Functions ser = Functions();
-PWM pwm = PWM();
+PWM pwm = PWM(pwm_non_polarisation);
 void setup()
 {
 	Serial.begin(14400);

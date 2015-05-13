@@ -13,6 +13,8 @@
 class PWM
 {
 public:
+	PWM(int pwmPin);
+	
 
 
 
