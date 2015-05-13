@@ -13,10 +13,13 @@
 class Functions
 {
 public:
-	Functions();
-	bool Check_Input();
+	Functions();	
 	bool Check_Reset();
+	bool Check_Input();
 	bool Check_LedValue();
+	bool Check_Polarisation_1();
+	bool Check_Polarisation_2();
+	bool Check_PolarisationValue();
 	
 	// a string to hold incoming data
 	String m_inputString = "";  
@@ -25,13 +28,13 @@ public:
 		
 	uint8_t m_led;
 	uint16_t m_val;
+	uint8_t m_pol_val;
 		
 private:
 	uint32_t m_value;
 	bool m_inputOk = false;
 	char m_tmp_buffer[128];
 	char *m_tmp_ptr = m_tmp_buffer;
-
 };
 
 

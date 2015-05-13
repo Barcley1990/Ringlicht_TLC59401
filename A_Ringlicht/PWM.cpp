@@ -7,10 +7,28 @@
 
 #include "PWM.h"
 
-PWM::PWM(int pwmPin)
+PWM::PWM(int pwm1Pin, int pwm2Pin)
 {
-	int m_pwmChannel = pwmPin;	
+	m_pwm_Channel_nonPol = pwm1Pin;
+	m_pwmChannel_Pol = pwm2Pin;	
+	
+	pinMode(m_pwmChannel_Pol, OUTPUT);
+	pinMode(m_pwm_Channel_nonPol, OUTPUT);
+	analogWrite(m_pwm_Channel_nonPol, 0);
+	analogWrite(m_pwmChannel_Pol, 0);
+}
 
+void PWM::setPWM_1(uint8_t value)
+{
+	if (value > 254)
+		value = 254;	
+	analogWrite(m_pwm_Channel_nonPol, value);
+}
+
+void PWM::setPWM_2(uint8_t value)
+{	if (value > 254)
+		value = 254;
+	analogWrite(m_pwmChannel_Pol, value);
 }
 
 

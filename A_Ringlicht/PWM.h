@@ -13,13 +13,17 @@
 class PWM
 {
 public:
-	PWM(int pwmPin);
+	// Constructor
+	PWM(int pwm1Pin, int pwm2Pin);
 	
+	void setPWM_1(uint8_t value);
+	void setPWM_2(uint8_t value);
 
 
 
 private:
-
+	int m_pwm_Channel_nonPol;
+	int m_pwmChannel_Pol;
 
 };
 

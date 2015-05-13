@@ -18,12 +18,13 @@
 #define clock   4
 #define latch   2
 #define oe		-1	// set to -1 to not use the enable pin (its optional)
-#define pwm_non_polarisation	7	// PWM for overview LEDs without pol-filter
-#define pwm_polarisation		8
+#define pwm_non_polarisation	7	// PWM Channel for overview LEDs without pol-filter
+#define pwm_polarisation		8	// PWM Channel for overview LEDs with pol-filter
 
 Driver tlc = Driver(NUM_TLC5974, clock, data, latch);
 Functions ser = Functions();
-PWM pwm = PWM(pwm_non_polarisation);
+PWM pwm = PWM(pwm_non_polarisation, pwm_polarisation);
+
 void setup()
 {
 	Serial.begin(14400);
@@ -51,14 +52,33 @@ void loop()
 			Serial.print("+Reset\r");
 			tlc.reset_all();		
 		}		
-		else 
+		else if(ser.Check_Input()) 
 		{	
 			Serial.print("no Reset ");
 			ser.Check_LedValue();
 			// set LED
-			tlc.setPWM(ser.m_led,ser.m_val);
+			tlc.setPWM(ser.m_led, ser.m_val);
 			tlc.write();						
 		}
+		else if (ser.Check_Polarisation_1())
+		{
+			Serial.print("YPOLY\r");
+			ser.Check_PolarisationValue();
+			pwm.setPWM_1(ser.m_pol_val);
+		}
+		else if (ser.Check_Polarisation_2())
+		{
+			Serial.print("NPOLY\r");
+			ser.Check_PolarisationValue();
+			pwm.setPWM_2(ser.m_pol_val);
+		}
+		else
+		{
+			Serial.print("Error\r");
+			ser.m_inputString = "";
+			ser.m_stringComplete = false;
+		}
+						
 	}	
 }
 

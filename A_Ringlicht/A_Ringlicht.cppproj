@@ -700,10 +700,10 @@ build.arch=AVR
     <Compile Include="A_Ringlicht.ino">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="dfg.cpp">
+    <Compile Include="PWM.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="dfg.h">
+    <Compile Include="PWM.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Functions.cpp">
