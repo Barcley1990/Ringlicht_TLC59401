@@ -7,6 +7,9 @@
 
 #include "Driver.h"
 #include "Functions.h"
+#include "PWM.h"
+
+// ARDUINO MEGA! 
 
 // How many boards do you have chained?
 #define NUM_TLC5974 1
@@ -15,12 +18,12 @@
 #define clock   4
 #define latch   2
 #define oe		-1	// set to -1 to not use the enable pin (its optional)
-#define supply	7	// V+
-#define gnd		6	// GND
+#define pwm_non_polarisation	7	// PWM for overview LEDs without pol-filter
+#define pwm_polarisation		8
 
 Driver tlc = Driver(NUM_TLC5974, clock, data, latch);
 Functions ser = Functions();
-
+PWM pwm = PWM();
 void setup()
 {
 	Serial.begin(14400);

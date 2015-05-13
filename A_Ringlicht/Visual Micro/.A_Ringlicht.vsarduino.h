@@ -26,5 +26,5 @@ void serialEvent();
 #include <Driver.h>
 #include <Functions.cpp>
 #include <Functions.h>
-#include <dfg.cpp>
-#include <dfg.h>
+#include <PWM.cpp>
+#include <PWM.h>
