@@ -51,7 +51,8 @@ void loop()
 		{			
 			Serial.print("+Reset\r");
 			tlc.reset_all();		
-		}		
+		}
+		// Set LEDs for shadow detection (Driver)		
 		else if(ser.Check_Input()) 
 		{	
 			Serial.print("no Reset ");
@@ -60,25 +61,27 @@ void loop()
 			tlc.setPWM(ser.m_led, ser.m_val);
 			tlc.write();						
 		}
+		// set LEDs for Polarization effect (MosFet)
 		else if (ser.Check_Polarisation_1())
 		{
 			Serial.print("NPOLY\r");
 			ser.Check_PolarisationValue();
 			pwm.setPWM_1(ser.m_pol_val);
 		}
+		// set LEDs for Polarization effect (MosFet)
 		else if (ser.Check_Polarisation_2())
 		{
 			Serial.print("YPOLY\r");
 			ser.Check_PolarisationValue();
 			pwm.setPWM_2(ser.m_pol_val);
 		}
+		// String does not match anyting
 		else
 		{
 			Serial.print("Error\r");
 			ser.m_inputString = "";
 			ser.m_stringComplete = false;
-		}
-						
+		}					
 	}	
 }
 
