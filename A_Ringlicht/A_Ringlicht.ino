@@ -45,7 +45,7 @@ void loop()
 {
 	if (ser.m_stringComplete)
 	{
-		Serial.print("completed string arrived ");
+		Serial.print("completed string arrived: ");
 		// check if RESET was insert	
 		if (ser.Check_Reset())
 		{			
@@ -62,13 +62,13 @@ void loop()
 		}
 		else if (ser.Check_Polarisation_1())
 		{
-			Serial.print("YPOLY\r");
+			Serial.print("NPOLY\r");
 			ser.Check_PolarisationValue();
 			pwm.setPWM_1(ser.m_pol_val);
 		}
 		else if (ser.Check_Polarisation_2())
 		{
-			Serial.print("NPOLY\r");
+			Serial.print("YPOLY\r");
 			ser.Check_PolarisationValue();
 			pwm.setPWM_2(ser.m_pol_val);
 		}

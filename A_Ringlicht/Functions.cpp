@@ -137,8 +137,13 @@ bool Functions::Check_PolarisationValue()
 		m_tmp_ptr++;
 	}
 
-	m_pol_val = (uint32_t) atol(m_tmp_buffer);
 	
+	m_pol_val = (uint16_t) atol(m_tmp_buffer);
+	if (m_pol_val > 255)
+	{
+		m_pol_val = 255;
+	}
+		
 	m_tmp_ptr = m_tmp_buffer;
 	m_inputString = "";
 	m_stringComplete = false;

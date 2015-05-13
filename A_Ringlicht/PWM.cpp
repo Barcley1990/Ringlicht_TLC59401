@@ -19,15 +19,16 @@ PWM::PWM(int pwm1Pin, int pwm2Pin)
 }
 
 void PWM::setPWM_1(uint8_t value)
-{
-	if (value > 254)
-		value = 254;	
+{		
+	Serial.println(value);
+	Serial.print("\r");
 	analogWrite(m_pwm_Channel_nonPol, value);
 }
 
 void PWM::setPWM_2(uint8_t value)
-{	if (value > 254)
-		value = 254;
+{	
+	Serial.println(value);
+	Serial.print("\r");
 	analogWrite(m_pwmChannel_Pol, value);
 }
 

@@ -28,7 +28,7 @@ public:
 		
 	uint8_t m_led;
 	uint16_t m_val;
-	uint8_t m_pol_val;
+	uint16_t m_pol_val;
 		
 private:
 	uint32_t m_value;
