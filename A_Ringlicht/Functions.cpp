@@ -58,42 +58,25 @@ bool Functions::Check_Input()
 
 bool Functions::Check_LedValue()
 {
-	// check if inputString == LEDxxVALUExxxx
-/*	if (Check_Input())
+	// get Channel and Brightness
+	for(uint8_t i=0; i<=1; i++)
 	{
-		Serial.print("+");
-		m_inputOk = true;
+		*m_tmp_ptr = m_inputString[i+3]; // umkopieren von Zeichen 3 & 4  aus s_buffer in tmp_buffer
+		m_tmp_ptr++;
 	}
-	else
+	for(uint8_t i=0; i<=3; i++)
 	{
-		Serial.print("-");
-		m_inputOk = false;
+		*m_tmp_ptr = m_inputString[i+10]; // umkopieren von Zeichen 10 - 13  aus s_buffer in tmp_buffer
+		m_tmp_ptr++;
 	}
-*/	
-/*	if (m_inputOk)
-	{
-*/		// get Channel and Brightness
-		for(uint8_t i=0; i<=1; i++)
-		{
-			*m_tmp_ptr = m_inputString[i+3]; // umkopieren von Zeichen 3 & 4  aus s_buffer in tmp_buffer
-			m_tmp_ptr++;
-		}
-		for(uint8_t i=0; i<=3; i++)
-		{
-			*m_tmp_ptr = m_inputString[i+10]; // umkopieren von Zeichen 10 - 13  aus s_buffer in tmp_buffer
-			m_tmp_ptr++;
-		}
 		
-		m_value = (uint32_t) atol(m_tmp_buffer);
-		m_led = m_value / 10000;
-		m_val = m_value - (m_led * 10000);
+	m_value = (uint32_t) atol(m_tmp_buffer);
+	m_led = m_value / 10000;
+	m_val = m_value - (m_led * 10000);
 
-		Serial.print(m_value);
-		Serial.print("\r");	
-/*	}
-	else  // wrong input
-	Serial.print("error\r");
-*/	
+	Serial.print(m_value);
+	Serial.print("\r");	
+
 	m_tmp_ptr = m_tmp_buffer;
 	m_inputString = "";
 	m_stringComplete = false;
@@ -101,7 +84,7 @@ bool Functions::Check_LedValue()
 
 bool Functions::Check_Polarisation_1()
 {
-	const char *pol = "YPOLY";
+	const char *pol = "NPOLY";
 	for (int i=0; i<5; i++)
 	{
 		if (m_inputString[i] == *pol)
@@ -116,7 +99,7 @@ bool Functions::Check_Polarisation_1()
 
 bool Functions::Check_Polarisation_2()
 {
-	const char *pol = "NPOLY";
+	const char *pol = "YPOLY";
 	for (int i=0; i<5; i++)
 	{
 		if (m_inputString[i] == *pol)
