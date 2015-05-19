@@ -18,7 +18,7 @@ public:
 	
 	void setPWM_1(uint8_t value);
 	void setPWM_2(uint8_t value);
-
+	void Reset(void);
 
 
 private:

@@ -32,5 +32,11 @@ void PWM::setPWM_2(uint8_t value)
 	analogWrite(m_pwmChannel_Pol, value);
 }
 
+void PWM::Reset(void)
+{
+	analogWrite(m_pwmChannel_Pol, 0);
+	analogWrite(m_pwm_Channel_nonPol, 0);
+}
+
 
 

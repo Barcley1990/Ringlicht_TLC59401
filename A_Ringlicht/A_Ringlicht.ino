@@ -50,7 +50,8 @@ void loop()
 		if (ser.Check_Reset())
 		{			
 			Serial.print("+Reset\r");
-			tlc.reset_all();		
+			tlc.reset_all();
+			pwm.Reset();		
 		}
 		// Set LEDs for shadow detection (Driver)		
 		else if(ser.Check_Input()) 
