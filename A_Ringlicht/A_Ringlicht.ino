@@ -39,6 +39,7 @@ void setup()
 	Serial.println("Eingabe Erwartet:");
 	
 	tlc.reset_all();
+	pwm.Reset();
 }
 	
 void loop()
@@ -48,10 +49,10 @@ void loop()
 		Serial.print("completed string arrived: ");
 		// check if RESET was insert	
 		if (ser.Check_Reset())
-		{			
-			Serial.print("+Reset\r");
+		{	
 			tlc.reset_all();
-			pwm.Reset();		
+			pwm.Reset();	
+			Serial.print("+Reset\r");	
 		}
 		// Set LEDs for shadow detection (Driver)		
 		else if(ser.Check_Input()) 
