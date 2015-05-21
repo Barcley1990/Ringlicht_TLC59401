@@ -18,6 +18,7 @@ extern "C" void __cxa_pure_virtual() {;}
 //
 //
 void serialEvent();
+void Timer_init();
 
 #include "C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega\pins_arduino.h" 
 #include "C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino\arduino.h"

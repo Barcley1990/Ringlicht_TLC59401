@@ -120,8 +120,6 @@ bool Functions::Check_PolarisationValue()
 		*m_tmp_ptr = m_inputString[i+5];
 		m_tmp_ptr++;
 	}
-	Serial.print(m_tmp_buffer);
-	Serial.print("\r");
 	m_pol_val = (uint16_t) atol(m_tmp_buffer);
 	if (m_pol_val > 255)
 	{

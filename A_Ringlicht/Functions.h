@@ -26,12 +26,12 @@ public:
 	// whether the string is complete
 	boolean m_stringComplete = false;
 		
-	uint8_t m_led;
-	uint16_t m_val;
-	uint16_t m_pol_val;
+	uint8_t m_led = 0;
+	uint16_t m_val = 0;
+	uint16_t m_pol_val = 0;
 		
 private:
-	uint32_t m_value;
+	uint32_t m_value = 0;
 	bool m_inputOk = false;
 	char m_tmp_buffer[128];
 	char *m_tmp_ptr = m_tmp_buffer;
