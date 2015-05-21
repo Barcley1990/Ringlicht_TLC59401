@@ -57,7 +57,6 @@ void loop()
 		// Set LEDs for shadow detection (Driver)		
 		else if(ser.Check_Input()) 
 		{	
-			Serial.print("no Reset ");
 			ser.Check_LedValue();
 			// set LED
 			tlc.setPWM(ser.m_led, ser.m_val);
@@ -66,21 +65,21 @@ void loop()
 		// set LEDs for Polarization effect (MosFet)
 		else if (ser.Check_Polarisation_1())
 		{
-			Serial.print("NPOLY\r");
+			Serial.print("NPOLY ");
 			ser.Check_PolarisationValue();
 			pwm.setPWM_1(ser.m_pol_val);
 		}
 		// set LEDs for Polarization effect (MosFet)
 		else if (ser.Check_Polarisation_2())
 		{
-			Serial.print("YPOLY\r");
+			Serial.print("YPOLY ");
 			ser.Check_PolarisationValue();
 			pwm.setPWM_2(ser.m_pol_val);
 		}
-		// String does not match anyting
+		// String does not match anything
 		else
 		{
-			Serial.print("Error\r");
+			Serial.print("Ups.. String doesn't match!\r");
 			ser.m_inputString = "";
 			ser.m_stringComplete = false;
 		}					

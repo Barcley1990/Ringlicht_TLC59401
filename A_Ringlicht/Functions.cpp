@@ -14,7 +14,7 @@ Functions::Functions()
 bool Functions::Check_Reset()
 {
 	const char *reset = "RESET";
-	for (int i=0; i<5; i++)
+	for (int i=0; i<5; ++i)
 	{
 		if (m_inputString[i] == *reset)
 		{
@@ -34,7 +34,7 @@ bool Functions::Check_Input()
 	const char *value = "VALUE";
 		 
 	// check for 'LED'
-	for (int i=0; i<3; i++)
+	for (int i=0; i<3; ++i)
 	{
 		if (m_inputString[i] == *led )
 		{
@@ -44,7 +44,7 @@ bool Functions::Check_Input()
 			return false;
 	}
 	// check for 'VALUE'
-	for (int i=5; i<10; i++)
+	for (int i=5; i<10; ++i)
 	{
 		if (m_inputString[i] == *value )
 		{
@@ -59,12 +59,12 @@ bool Functions::Check_Input()
 bool Functions::Check_LedValue()
 {
 	// get Channel and Brightness
-	for(uint8_t i=0; i<=1; i++)
+	for(uint8_t i=0; i<=1; ++i)
 	{
 		*m_tmp_ptr = m_inputString[i+3]; // umkopieren von Zeichen 3 & 4  aus s_buffer in tmp_buffer
 		m_tmp_ptr++;
 	}
-	for(uint8_t i=0; i<=3; i++)
+	for(uint8_t i=0; i<=3; ++i)
 	{
 		*m_tmp_ptr = m_inputString[i+10]; // umkopieren von Zeichen 10 - 13  aus s_buffer in tmp_buffer
 		m_tmp_ptr++;
@@ -80,12 +80,13 @@ bool Functions::Check_LedValue()
 	m_tmp_ptr = m_tmp_buffer;
 	m_inputString = "";
 	m_stringComplete = false;
+	memset(m_tmp_buffer, 0, sizeof(m_tmp_buffer));
 }
 
 bool Functions::Check_Polarisation_1()
 {
 	const char *pol = "NPOLY";
-	for (int i=0; i<5; i++)
+	for (int i=0; i<5; ++i)
 	{
 		if (m_inputString[i] == *pol)
 		{
@@ -100,7 +101,7 @@ bool Functions::Check_Polarisation_1()
 bool Functions::Check_Polarisation_2()
 {
 	const char *pol = "YPOLY";
-	for (int i=0; i<5; i++)
+	for (int i=0; i<5; ++i)
 	{
 		if (m_inputString[i] == *pol)
 		{
@@ -114,13 +115,13 @@ bool Functions::Check_Polarisation_2()
 
 bool Functions::Check_PolarisationValue()
 {
-	for (uint8_t i=0; i<3; i++)
+	for (uint8_t i=0; i<3; ++i)
 	{
 		*m_tmp_ptr = m_inputString[i+5];
 		m_tmp_ptr++;
 	}
-
-	
+	Serial.print(m_tmp_buffer);
+	Serial.print("\r");
 	m_pol_val = (uint16_t) atol(m_tmp_buffer);
 	if (m_pol_val > 255)
 	{
@@ -130,4 +131,5 @@ bool Functions::Check_PolarisationValue()
 	m_tmp_ptr = m_tmp_buffer;
 	m_inputString = "";
 	m_stringComplete = false;
+	memset(m_tmp_buffer, 0, sizeof(m_tmp_buffer));
 }
