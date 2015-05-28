@@ -13,18 +13,18 @@
 #include <stdlib.h>
 #include <avr/io.h>
 
-// ARDUINO MEGA! 
+// ARDUINO MICRO! 
 
 // How many boards do you have chained?
 #define NUM_TLC5974 1
 #define timeout 1000	// set uart timeout in ms
 
-#define data    5
-#define clock   4
-#define latch   2
+#define data    4
+#define clock   6
+#define latch   8
 #define oe		-1	// set to -1 to not use the enable pin (its optional)
-#define pwm_non_polarisation	7	// PWM Channel for overview LEDs without pol-filter
-#define pwm_polarisation		8	// PWM Channel for overview LEDs with pol-filter
+#define pwm_non_polarisation	3	// PWM Channel for overview LEDs without pol-filter
+#define pwm_polarisation		5	// PWM Channel for overview LEDs with pol-filter
 
 Driver tlc = Driver(NUM_TLC5974, clock, data, latch);
 Functions ser = Functions();
@@ -116,12 +116,11 @@ void serialEvent()
 // Interrupt every 16ms
 void Timer_init()
 {
-	TCCR2B |= (1<<CS22) | (1<<CS21) |(1<<CS20);	// prescaler = 1024 -> 16Mhz/1024 = 15625Hz
-	TIMSK2 |= (1<<TOIE2);
-	sei();
+	TCCR3B |= (1<<CS32) | (1<<CS31) |(1<<CS30);	// prescaler = 1024 -> 16Mhz/1024 = 15625Hz
+	TIMSK3 |= (1<<TOIE3);
 }
 
-ISR (TIMER2_OVF_vect)
+ISR (TIMER3_OVF_vect)
 {
 	if (transmit_started == true)
 		uart_timeout++;
