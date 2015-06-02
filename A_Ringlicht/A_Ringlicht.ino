@@ -19,10 +19,10 @@
 #define NUM_TLC5974 1
 #define timeout 1000	// set uart timeout in ms
 
-#define data    4
-#define clock   6
-#define latch   8
-#define oe		-1	// set to -1 to not use the enable pin (its optional)
+#define data    A5
+#define clock   A4
+#define latch   A2
+#define oe		-1	// set to -1 to not use the enable pin (its optional) connected to pin 3.
 #define pwm_non_polarisation	3	// PWM Channel for overview LEDs without pol-filter
 #define pwm_polarisation		5	// PWM Channel for overview LEDs with pol-filter
 
