@@ -36,6 +36,7 @@ volatile uint8_t uart_timeout = 0;
 void setup()
 {
 	Serial.begin(14400);
+	while(!Serial);
 	Timer_init();
 	Serial.println("Ringlicht bereit!");
 	tlc.begin();
@@ -46,9 +47,31 @@ void setup()
 	pwm.Reset();
 }
 	
+void serialEvent()
+{
+	while(Serial.available())
+	{
+		transmit_started = true;
+		// get the new byte:
+		char inChar = (char)Serial.read();
+		// add it to the inputString:
+		ser.m_inputString += inChar;
+		// if the incoming character is a newline, set a flag
+		// so the main loop can do something about it:
+		if (inChar == '\n' || inChar == '\r')
+		{
+			ser.m_stringComplete = true;
+			uart_timeout = 0;
+			transmit_started = false;
+		}
+	}
+}
+
 void loop()
 {
 	cli();
+	if(Serial.available()>0)
+		serialEvent();
 	if (ser.m_stringComplete)
 	{
 		Serial.print("completed string arrived: ");
@@ -92,25 +115,7 @@ void loop()
 	sei();
 }
 
-void serialEvent()
-{
-	while(Serial.available())
-	{
-		transmit_started = true;
-		// get the new byte:
-		char inChar = (char)Serial.read();
-		// add it to the inputString:
-		ser.m_inputString += inChar;
-		// if the incoming character is a newline, set a flag
-		// so the main loop can do something about it:
-		if (inChar == '\n' || inChar == '\r') 
-		{
-			ser.m_stringComplete = true;
-			uart_timeout = 0;	
-			transmit_started = false;
-		}
-	}
-}
+
 
 // Initialize Timer 1 for Interrupt Service Routine
 // Interrupt every 16ms
