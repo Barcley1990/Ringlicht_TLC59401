@@ -36,7 +36,8 @@ volatile uint8_t uart_timeout = 0;
 void setup()
 
 {
-	if (oe >= 0) {pinMode(oe, OUTPUT);digitalWrite(oe, HIGH);}
+	//if (oe >= 0) {pinMode(oe, INPUT_PULLUP);digitalWrite(oe, HIGH);}
+	DDRF |= (1<<PF4); 
 	Serial.begin(14400);
 	while(!Serial);
 	//Timer_init();
@@ -46,7 +47,7 @@ void setup()
 	
 	pwm.Reset();
 	tlc.reset_all();
-	digitalWrite(oe, LOW);
+	PORTF &= ~(1<<PF4);
 }
 	
 void serialEvent()
