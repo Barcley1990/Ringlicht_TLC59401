@@ -22,9 +22,9 @@
 #define data    A5
 #define clock   A4
 #define latch   A2
-#define oe		-1	// set to -1 to not use the enable pin (its optional) connected to pin 3.
-#define pwm_non_polarisation	3	// PWM Channel for overview LEDs without pol-filter
-#define pwm_polarisation		5	// PWM Channel for overview LEDs with pol-filter
+#define oe		A3	// set to -1 to not use the enable pin (its optional) connected to pin 3.
+#define pwm_non_polarisation	3	// PWM Channel for LEDs without pol-filter
+#define pwm_polarisation		5	// PWM Channel for LEDs with pol-filter
 
 Driver tlc = Driver(NUM_TLC5974, clock, data, latch);
 Functions ser = Functions();
@@ -34,17 +34,19 @@ volatile uint8_t transmit_started = 0;
 volatile uint8_t uart_timeout = 0;
 
 void setup()
+
 {
+	if (oe >= 0) {pinMode(oe, OUTPUT);digitalWrite(oe, HIGH);}
 	Serial.begin(14400);
 	while(!Serial);
-	Timer_init();
+	//Timer_init();
 	Serial.println("Ringlicht bereit!");
 	tlc.begin();
-	if (oe >= 0){pinMode(oe, OUTPUT);digitalWrite(oe, LOW);}
 	Serial.println("Eingabe Erwartet:");
-
-	tlc.reset_all();
+	
 	pwm.Reset();
+	tlc.reset_all();
+	digitalWrite(oe, LOW);
 }
 	
 void serialEvent()
@@ -115,7 +117,8 @@ void loop()
 	sei();
 }
 
-
+// ToDo: Neuen Timer für Timeout festlegen. Timer/Counter 3 ist für PWM an Pin 5 reserviert.
+/*
 
 // Initialize Timer 1 for Interrupt Service Routine
 // Interrupt every 16ms
@@ -136,3 +139,4 @@ ISR (TIMER3_OVF_vect)
 		Serial.print("UART Timeout\r");
 	}	
 }
+*/

@@ -79,29 +79,20 @@ boolean Driver::begin()
   return true;
 }
 
+void Driver::full_brightness()
+{
+	for (int i=1; i<=8; i++)
+	{
+		setPWM(i,4095);
+	}
+	write();
+}
+
 void Driver::reset_all()
 {
-	for (int i=0; i<24; i++)
+	for (int i=1; i<=8; i++)
 	{
 		setPWM(i,0);
 	}
 	write();
-}
-void Driver::full_brightness()
-{
-	digitalWrite(_lat, LOW);
-	digitalWrite(_clk, LOW);
-	// 24 channels per TLC5974
-	for (int i=288; i>0 ; i--)
-	{
-			digitalWrite(_clk, LOW);
-			delay(1);
-			digitalWrite(_dat, HIGH);
-			delay(1);
-			digitalWrite(_clk, HIGH);	
-	}
-	digitalWrite(_clk, LOW);
-
-	digitalWrite(_lat, HIGH);
-	digitalWrite(_lat, LOW);
 }
