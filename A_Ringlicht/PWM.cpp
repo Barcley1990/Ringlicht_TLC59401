@@ -7,6 +7,7 @@
 
 #include "PWM.h"
 
+
 PWM::PWM(int pwm1Pin, int pwm2Pin)
 {
 	m_pwm_Channel_nonPol = pwm1Pin;
@@ -38,5 +39,12 @@ void PWM::Reset(void)
 	analogWrite(m_pwm_Channel_nonPol, 0);
 }
 
-
+void PWM::Init(void);
+{
+	pinMode(3, OUTPUT);			// ( TIMER0B )
+	pinMode(5, OUTPUT);			// ( TIMER3A )
+	
+	TCCR0A |= (1<<COM0B1);		// These bits control the Output Compare pin (OC0A) behavior.
+	
+}
 

@@ -23,8 +23,8 @@
 #define clock   A4
 #define latch   A2
 #define oe		A3	// set to -1 to not use the enable pin (its optional) connected to pin 3.
-#define pwm_non_polarisation	3	// PWM Channel for LEDs without pol-filter
-#define pwm_polarisation		5	// PWM Channel for LEDs with pol-filter
+#define pwm_non_polarisation	3	// PWM Channel for LEDs without pol-filter ( TIMER0B )
+#define pwm_polarisation		5	// PWM Channel for LEDs with pol-filter	   ( TIMER3A )
 
 Driver tlc = Driver(NUM_TLC5974, clock, data, latch);
 Functions ser = Functions();
@@ -45,6 +45,7 @@ void setup()
 	tlc.begin();
 	Serial.println("Eingabe Erwartet:");
 	
+	pwm.Init();
 	pwm.Reset();
 	tlc.reset_all();
 	PORTF &= ~(1<<PF4);
