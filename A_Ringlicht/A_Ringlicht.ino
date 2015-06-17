@@ -23,7 +23,8 @@
 #define clock   A4
 #define latch   A2
 #define oe		A3	// set to -1 to not use the enable pin (its optional) connected to pin 3.
-#define pwm_non_polarisation	3	// PWM Channel for LEDs without pol-filter ( TIMER0B )
+/* N.B. The PWM is just working with this PIN configuration! */
+#define pwm_non_polarisation	9	// PWM Channel for LEDs without pol-filter ( TIMER1A )
 #define pwm_polarisation		5	// PWM Channel for LEDs with pol-filter	   ( TIMER3A )
 
 Driver tlc = Driver(NUM_TLC5974, clock, data, latch);
@@ -44,7 +45,7 @@ void setup()
 	Serial.println("Ringlicht bereit!");
 	tlc.begin();
 	Serial.println("Eingabe Erwartet:");
-	
+
 	pwm.Init();
 	pwm.Reset();
 	tlc.reset_all();
