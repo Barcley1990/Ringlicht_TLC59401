@@ -40,8 +40,8 @@ void PWM::setPWM_2(uint8_t value)	// Pol
 
 void PWM::Reset(void)
 {
-	OCR1AL = 0xff;
-	OCR3AL = 0xff;
+	OCR1AL = 0x0;
+	OCR3AL = 0x0;
 }
 
 void PWM::Init(void)
