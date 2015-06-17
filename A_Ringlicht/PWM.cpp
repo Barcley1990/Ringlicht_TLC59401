@@ -24,42 +24,24 @@ void PWM::setPWM_1(uint8_t value) // NonPol
 {		
 	Serial.println(value);
 	Serial.print("\r");
-	if (value == 0)
-	{
-		digitalWrite(9, 0);
-	}
-	if (value >= 255)
-	{
-		digitalWrite(9, 1);
-	}
-	else
-	{
-		OCR1AL = value; // set pwm duty
-	}	
+	
+	OCR1AL = value; // set pwm duty
+		
 }
 
 void PWM::setPWM_2(uint8_t value)	// Pol
 {	
 	Serial.println(value);
 	Serial.print("\r");
-	if (value == 0)
-	{
-		digitalWrite(5, 0);
-	}
-	if (value >= 255)
-	{
-		digitalWrite(5, 1);
-	}
-	else
-	{
-		OCR3AL = value; // set pwm duty
-	}
+	
+	OCR3AL = value; // set pwm duty
+	
 }
 
 void PWM::Reset(void)
 {
-	digitalWrite(5,0);
-	digitalWrite(9,0);
+	OCR1AL = 0xff;
+	OCR3AL = 0xff;
 }
 
 void PWM::Init(void)
@@ -68,9 +50,9 @@ void PWM::Init(void)
 	pinMode(9, OUTPUT);			// ( TIMER1A )
 	
 	TCCR1B = TCCR1B & 0b11111000 | 0x01;				// No Prescaling
-	TCCR1A |= (1<<COM1A1) | (1<<COM1A0) | (1<<WGM10);	// 8 Bit FastPWM		
+	TCCR1A |= (1<<COM1A1) | (1<<WGM10);	// 8 Bit FastPWM		
 		
 	TCCR3B = TCCR3B & 0b11111000 | 0x01;					// No Prescaling	
-	TCCR3A |= (1<<COM3A1) | (1<<COM1A0) | (1<<WGM30);		// 8 Bit FastPWM
+	TCCR3A |= (1<<COM3A1) | (1<<WGM30);		// 8 Bit FastPWM
 }
 
