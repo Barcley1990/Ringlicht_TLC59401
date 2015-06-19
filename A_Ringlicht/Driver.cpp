@@ -75,6 +75,14 @@ boolean Driver::begin()
   pinMode(_dat, OUTPUT);
   pinMode(_lat, OUTPUT);
   digitalWrite(_lat, LOW);
+  for (int i=0; i<288; ++i)
+  {
+	digitalWrite(_clk,LOW);
+	digitalWrite(_dat,HIGH);
+	digitalWrite(_clk,LOW);
+  }
+	digitalWrite(_lat, HIGH);
+	digitalWrite(_lat, LOW);
 
   return true;
 }

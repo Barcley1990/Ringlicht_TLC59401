@@ -35,21 +35,25 @@ volatile uint8_t transmit_started = 0;
 volatile uint8_t uart_timeout = 0;
 
 void setup()
-
 {
-	//if (oe >= 0) {pinMode(oe, INPUT_PULLUP);digitalWrite(oe, HIGH);}
-	DDRF |= (1<<PF4); 
+	// force off outputs
+	if (oe >= 0) {pinMode(oe,OUTPUT);digitalWrite(oe, HIGH);}
+	pinMode(13,OUTPUT);
+	digitalWrite(13,HIGH);
+	tlc.begin();
+	tlc.reset_all();
+	pwm.Init();
+	pwm.Reset();	
+	PORTF &= ~(1<<PF4);
+	digitalWrite(13,LOW);
+	
 	Serial.begin(14400);
 	while(!Serial);
 	//Timer_init();
-	Serial.println("Ringlicht bereit!");
-	tlc.begin();
+	Serial.println("Ringlicht bereit!");	
 	Serial.println("Eingabe Erwartet:");
 
-	pwm.Init();
-	pwm.Reset();
-	tlc.reset_all();
-	PORTF &= ~(1<<PF4);
+
 }
 	
 void serialEvent()
@@ -83,6 +87,7 @@ void loop()
 		// check if RESET was insert	
 		if (ser.Check_Reset())
 		{	
+			digitalWrite(oe,HIGH);
 			tlc.reset_all();
 			pwm.Reset();	
 			Serial.print("+Reset\r");	
@@ -93,7 +98,8 @@ void loop()
 			ser.Check_LedValue();
 			// set LED
 			tlc.setPWM(ser.m_led, ser.m_val);
-			tlc.write();						
+			tlc.write();
+			digitalWrite(oe,LOW);						
 		}
 		// set LEDs for Polarization effect (MosFet)
 		else if (ser.Check_Polarisation_1())
@@ -115,7 +121,8 @@ void loop()
 			Serial.print("Ups.. String doesn't match!\r");
 			ser.m_inputString = "";
 			ser.m_stringComplete = false;
-		}					
+			digitalWrite(oe,HIGH);
+		}				
 	}
 	sei();
 }
