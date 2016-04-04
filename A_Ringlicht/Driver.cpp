@@ -103,23 +103,35 @@ digitalWrite(_lat, LOW);
 void Driver::setPWM(uint8_t chan, uint16_t pwm) 
 {
   if (pwm > 4095) pwm = 4095;
-  if (chan > 8*numdrivers) return;
+  if (chan > 16*numdrivers) return;	// 16 LEDs (channels) are connected. 1-8: bottom ring; 9-16 mid ring.
   uint8_t ch;
   switch(chan)
   {
+	  // bottom ring
 	  case 1: ch = 0; break;
-	  case 2: ch = 3; break;
-	  case 3: ch = 6; break;
-	  case 4: ch = 9; break;
-	  case 5: ch = 12; break;
-	  case 6: ch = 15; break;
-	  case 7: ch = 18; break;
-	  case 8: ch = 21; break;
+	  case 2: ch = 4; break;
+	  case 3: ch = 8; break;
+	  case 4: ch = 12; break;
+	  case 5: ch = 16; break;
+	  case 6: ch = 20; break;
+	  case 7: ch = 24; break;
+	  case 8: ch = 28; break;
+	  // mid ring
+	  case 9: ch = 32; break;
+	  case 10: ch = 36; break;
+	  case 11: ch = 40; break;
+	  case 12: ch = 44; break;
+	  case 13: ch = 48; break;
+	  case 14: ch = 52; break;
+	  case 15: ch = 56; break;
+	  case 16: ch = 60; break;
 	  default: Serial.print("Channel not available!\r"); break;
   }
+  //normalization: 1 channel -> 4 outputs
   pwmbuffer[ch] = pwm;
   pwmbuffer[ch+1] = pwm;
   pwmbuffer[ch+2] = pwm; 
+  pwmbuffer[ch+3] = pwm;
 }
 
 boolean Driver::begin() 
