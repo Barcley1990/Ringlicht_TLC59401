@@ -67,8 +67,8 @@ void setup()
 	Serial.begin(BaudRate);
 	while(!Serial);
 
-	Serial.println("Ringlicht bereit!");	
-	Serial.println("Eingabe Erwartet:");
+	Serial.println("Ring light ready!");	
+	Serial.println("Input expected:");
 }
 	
 void serialEvent()
@@ -98,11 +98,11 @@ void loop()
 		serialEvent();
 	if (ser.m_stringComplete)
 	{
-		Serial.print("completed string arrived: ");
+		Serial.print("got something: ");
 		// check if RESET was insert	
 		if (ser.Check_Reset())
 		{	
-			digitalWrite(oe,HIGH);
+			digitalWrite(BLANK, LOW);
 			tlc.reset_all();
 			pwm.Reset();	
 			Serial.print("+Reset\r");	
@@ -114,7 +114,7 @@ void loop()
 			// set LED
 			tlc.setPWM(ser.m_led, ser.m_val);
 			tlc.write();
-			digitalWrite(oe,LOW);						
+			digitalWrite(BLANK,HIGH);						
 		}
 		// set LEDs for Polarization effect (MosFet)
 		else if (ser.Check_Polarisation_1())
@@ -136,7 +136,7 @@ void loop()
 			Serial.print("Ups.. String doesn't match!\r");
 			ser.m_inputString = "";
 			ser.m_stringComplete = false;
-			digitalWrite(oe,HIGH);
+			digitalWrite(BLANK,LOW);
 		}				
 	}
 	sei();
