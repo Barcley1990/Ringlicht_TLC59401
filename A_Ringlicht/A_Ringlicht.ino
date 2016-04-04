@@ -26,42 +26,47 @@
 #include <stdlib.h>
 #include <avr/io.h>
 
+#define BaudRate 9600
 
 // How many boards do you have chained?
 #define NUM_TLC59401 1
 #define timeout 1000	// set UART timeout in ms
 
-#define data    4
-#define clock   5
-#define latch   6
-#define oe		7	// set to -1 to not use the enable pin (its optional) connected to pin 3.
+#define MODE	2	// GS or DC mode
+#define XERR	3	// Reports the error flags
+#define DATA    4	// Serial Data In (SIN)
+#define SCLK	5	// Serial Clock (SCLK)
+#define LATCH   6	// Latch (XLAT)
+#define BLANK	7	// set to -1 to not use the enable pin (its optional).
 /* N.B. The PWM is just working with this PIN configuration! */
 #define pwm_non_polarisation	9	// PWM Channel for LEDs without pol-filter ( TIMER1A )
-#define pwm_polarisation		5	// PWM Channel for LEDs with pol-filter	   ( TIMER3A )
+#define pwm_polarisation		10	// PWM Channel for LEDs with pol-filter	   ( TIMER3A )
 
-Driver tlc = Driver(NUM_TLC5974, clock, data, latch);
+// create objects
+Driver tlc = Driver(NUM_TLC59401, SCLK, DATA, LATCH);
 Functions ser = Functions();
 PWM pwm = PWM(pwm_non_polarisation, pwm_polarisation);
 
+// globals for UART com.
 volatile uint8_t transmit_started = 0;
 volatile uint8_t uart_timeout = 0;
 
 void setup()
 {
 	// force off outputs
-	if (oe >= 0) {pinMode(oe,OUTPUT);digitalWrite(oe, HIGH);}
-	pinMode(13,OUTPUT);
-	digitalWrite(13,HIGH);
+	if (BLANK >= 0) {pinMode(BLANK,OUTPUT); digitalWrite(BLANK, LOW);}
+	// setting  GS mode
+	pinMode(MODE,OUTPUT); digitalWrite(MODE,LOW);
+	
 	tlc.begin();
 	tlc.reset_all();
 	pwm.Init();
 	pwm.Reset();	
-	PORTF &= ~(1<<PF4);
-	digitalWrite(13,LOW);
 	
-	Serial.begin(14400);
+	// Init UART
+	Serial.begin(BaudRate);
 	while(!Serial);
-	//Timer_init();
+
 	Serial.println("Ringlicht bereit!");	
 	Serial.println("Eingabe Erwartet:");
 }
