@@ -52,8 +52,6 @@ void setup()
 	//Timer_init();
 	Serial.println("Ringlicht bereit!");	
 	Serial.println("Eingabe Erwartet:");
-
-
 }
 	
 void serialEvent()
