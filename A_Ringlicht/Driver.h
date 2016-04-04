@@ -4,8 +4,8 @@
  * Created: 16.04.2015 11:38:39
  *  Author: Tobias Nuss
  */ 
-#ifndef _ADAFRUIT_TLC5947_H
-#define _ADAFRUIT_TLC5947_H
+#ifndef _ADAFRUIT_TLC59401_H
+#define _ADAFRUIT_TLC59401_H
 
 #include <Arduino.h>
 
@@ -30,4 +30,4 @@ private:
 };
 
 
-#endif /* INCFILE1_H_ */
+#endif /* _ADAFRUIT_TLC59401_H */

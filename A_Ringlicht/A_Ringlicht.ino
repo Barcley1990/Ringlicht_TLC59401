@@ -3,6 +3,19 @@
  *
  * Created: 4/16/2015 11:33:02 AM
  * Author: Tobias Nuss
+ * New Version for new layout. Used Microcontroller: Atmega 328P 
+ * Used LED driver: TLC59401 (4x)
+ *
+ *	  Atmega328 -> digital pins (Arduino Uno)
+ * MODE:	PD2 -> Pin 2
+ * XERR:	PD3 -> Pin 3
+ * SIN:		PD4 -> Pin 4
+ * SCLK:	PD5 -> Pin 5
+ * XLAT:	PD6 -> Pin 6
+ * BLANK:	PD7 -> Pin 7
+ * GSCLK:	PB0 -> Pin 8
+ * PWM1:	PB1 -> Pin 9 (PWM)
+ * PWM2:	PB2 -> Pin 10 (PWM)
  */ 
 
 #include "Driver.h"
@@ -13,16 +26,15 @@
 #include <stdlib.h>
 #include <avr/io.h>
 
-// ARDUINO MICRO! 
 
 // How many boards do you have chained?
-#define NUM_TLC5974 1
-#define timeout 1000	// set uart timeout in ms
+#define NUM_TLC59401 1
+#define timeout 1000	// set UART timeout in ms
 
-#define data    A5
-#define clock   A4
-#define latch   A2
-#define oe		A3	// set to -1 to not use the enable pin (its optional) connected to pin 3.
+#define data    4
+#define clock   5
+#define latch   6
+#define oe		7	// set to -1 to not use the enable pin (its optional) connected to pin 3.
 /* N.B. The PWM is just working with this PIN configuration! */
 #define pwm_non_polarisation	9	// PWM Channel for LEDs without pol-filter ( TIMER1A )
 #define pwm_polarisation		5	// PWM Channel for LEDs with pol-filter	   ( TIMER3A )
