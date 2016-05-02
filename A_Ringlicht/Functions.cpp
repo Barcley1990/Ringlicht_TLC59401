@@ -74,8 +74,8 @@ bool Functions::Check_LedValue()
 	m_led = m_value / 10000;
 	m_val = m_value - (m_led * 10000);
 
-	Serial.print(m_value);
-	Serial.print("\r");	
+	Serial.println(m_value);
+	//Serial.print("\r");	
 
 	m_tmp_ptr = m_tmp_buffer;
 	m_inputString = "";
@@ -130,4 +130,106 @@ bool Functions::Check_PolarisationValue()
 	m_inputString = "";
 	m_stringComplete = false;
 	memset(m_tmp_buffer, 0, sizeof(m_tmp_buffer));
+}
+
+bool Functions::Toggle() {
+	const char *ptr = "TOGGLE";
+	for (int i=0; i<6; ++i)
+	{
+		if (m_inputString[i] == *ptr)
+		{
+			ptr++;
+		}
+		else
+		return false;
+	}
+	
+	// copy values
+	*m_tmp_ptr = m_inputString[6]; 
+	uint8_t i=(uint8_t)atoi(m_tmp_buffer);
+	*m_tmp_ptr = m_inputString[7];
+	uint8_t j=(uint8_t)atoi(m_tmp_buffer);
+	
+	// if i and j are between 0 and 10
+	if (i>=0 && i<=10 && j>=0 && j<=10){
+		TogglePin(i, j);
+		
+		m_tmp_ptr = m_tmp_buffer;
+		m_inputString = "";
+		m_stringComplete = false;
+		memset(m_tmp_buffer, 0, sizeof(m_tmp_buffer));
+		return true;		
+	}
+	else
+	return false;	
+}
+
+
+void Functions::TogglePin(uint8_t pin, uint8_t state){
+	switch (pin) {
+		case 2: if (state==1)	// Mode
+			PORTD |= (1<<PD2);
+		else
+			PORTD &= ~(1<<PD2);
+		break;
+		case 3: if (state==1)	// XERR
+			PORTD |= (1<<PD3);
+		else
+			PORTD &= ~(1<<PD3);
+		break;
+		case 4: if (state==1)	// SIN
+			PORTD |= (1<<PD4);
+		else
+			PORTD &= ~(1<<PD4);
+		break;
+		case 5: if (state==1)	// SCLK
+			PORTD |= (1<<PD5);
+		else
+			PORTD &= ~(1<<PD5);
+		break;
+		case 6: if (state==1)	// XLAT
+			PORTD|= (1<<PD6);
+		else
+			PORTD &= ~(1<<PD6);
+		break;
+		case 7: if (state==1)	// BLANK
+			PORTD |= (1<<PD7);
+		else
+			PORTD &= ~(1<<PD7);
+		break;
+	}
+}
+
+bool Functions::Help(){
+	const char *ptr = "HELP";
+	for (int i=0; i<4; ++i)
+	{
+		if (m_inputString[i] == *ptr)
+		{
+			ptr++;
+		}
+		else
+			return false;
+	}
+	Serial.println("");
+	Serial.println("***** Commands *****");
+	Serial.println("(1):RESET");
+	Serial.println("(2):LEDxxVALUExxxx");
+	Serial.println("(3):YPOLYxxx");
+	Serial.println("(4):NPOLYxxx");
+	Serial.println("(5):TOGGLExx");
+	Serial.println("");
+	Serial.println("(1):Reset all LEDs");
+	Serial.println("(2):Set LED 1-16 individually with values from 0-4095.");
+	Serial.println("(3):Turn on 8 LEDs with polarization filter. Set Brightness from 0-255.");
+	Serial.println("(4):Turn on 8 LEDs without polarization filter. Set Brightness from 0-255.");
+	Serial.println("(5):Toggle a micro controller pin. The first value sets the number of the pin, the second  is used for HIGH (1) and LOW (0).");
+	Serial.println("********************");
+	
+	m_tmp_ptr = m_tmp_buffer;
+	m_inputString = "";
+	m_stringComplete = false;
+	memset(m_tmp_buffer, 0, sizeof(m_tmp_buffer));
+	
+	return true;
 }

@@ -17,7 +17,7 @@
  * data at the end of the grayscale cycle. Latching in new grayscale data immediately overwrites the existing
  * grayscale data.
  *
- * MODE:		
+ * MODE:	When MODE=GND, the device is in GS mode. When MODE=Vcc, the device is in DC Mode	
  * XERR:	Reports both error Flags (TEF and LOD). Normal operation: HIGH (Data Sheet S.13)
  * SIN:		Serial Data In		
  * SCLK:	Serial Clock
@@ -57,12 +57,13 @@
 #include "Driver.h"
 
 // Constructor
-Driver::Driver(uint8_t n, uint8_t c, uint8_t d, uint8_t l) 
+Driver::Driver(uint8_t n, uint8_t c, uint8_t d, uint8_t l, uint8_t m) 
 {
   numdrivers = n;
   _clk = c;	// SCLK
   _dat = d;	// SIN
   _lat = l;	// XLAT
+  _mod = m; // MODE
 
   pwmbuffer = (uint16_t *)calloc(2, 16*n);
 }
@@ -102,6 +103,7 @@ digitalWrite(_lat, LOW);
 
 void Driver::setPWM(uint8_t chan, uint16_t pwm) 
 {
+  //Serial.println(chan);Serial.println(pwm);
   if (pwm > 4095) pwm = 4095;
   if (chan > 16*numdrivers) return;	// 16 LEDs (channels) are connected. 1-8: bottom ring; 9-16 mid ring.
   uint8_t ch;
@@ -125,7 +127,7 @@ void Driver::setPWM(uint8_t chan, uint16_t pwm)
 	  case 14: ch = 52; break;
 	  case 15: ch = 56; break;
 	  case 16: ch = 60; break;
-	  default: Serial.print("Channel not available!\r"); break;
+	  default: Serial.println("Channel not available!"); break;
   }
   //normalization: 1 channel -> 4 outputs
   pwmbuffer[ch] = pwm;
@@ -141,6 +143,10 @@ boolean Driver::begin()
   pinMode(_clk, OUTPUT);
   pinMode(_dat, OUTPUT);
   pinMode(_lat, OUTPUT);
+  pinMode(_mod, OUTPUT); 
+  // setting  GS mode
+  digitalWrite(_mod, LOW);
+  
   digitalWrite(_lat, LOW);
   for (int i=0; i<288; ++i)
   {
@@ -165,7 +171,7 @@ void Driver::full_brightness()
 
 void Driver::reset_all()
 {
-	for (int i=1; i<=8; i++)
+	for (int i=1; i<=16; i++)
 	{
 		setPWM(i,0);
 	}

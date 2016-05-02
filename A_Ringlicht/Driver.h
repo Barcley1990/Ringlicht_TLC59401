@@ -13,7 +13,7 @@
 class Driver
 {
  public:
-	Driver(uint8_t n, uint8_t c, uint8_t d, uint8_t l);
+	Driver(uint8_t n, uint8_t c, uint8_t d, uint8_t l, uint8_t m);
 
 	boolean begin(void);
 
@@ -25,7 +25,7 @@ class Driver
 
 private:
 	uint16_t *pwmbuffer;
-	uint8_t numdrivers, _clk, _dat, _lat;
+	uint8_t numdrivers, _clk, _dat, _lat, _mod;
 
 };
 

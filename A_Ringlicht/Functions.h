@@ -14,12 +14,16 @@ class Functions
 {
 public:
 	Functions();	
+	bool Help();
 	bool Check_Reset();
 	bool Check_Input();
 	bool Check_LedValue();
 	bool Check_Polarisation_1();
 	bool Check_Polarisation_2();
 	bool Check_PolarisationValue();
+	bool Toggle();
+	void TogglePin(uint8_t pin, uint8_t state);
+	
 	
 	// a string to hold incoming data
 	String m_inputString = "";  

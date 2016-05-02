@@ -3,7 +3,7 @@
  *
  * Created: 4/16/2015 11:33:02 AM
  * Author: Tobias Nuss
- * New Version for new layout. Used Microcontroller: Atmega 328P 
+ * New Version for new layout. Used Microcontroller: Atmega 328P with ext. Quartz: 18.432 MHz
  * Used LED driver: TLC59401 (4x)
  *
  *	  Atmega328 -> digital pins (Arduino Uno)
@@ -26,10 +26,12 @@
 #include <stdlib.h>
 #include <avr/io.h>
 
-#define BaudRate 9600
+#define BaudRate 115200
+#define HIGH	1
+#define LOW		0
 
 // How many boards do you have chained?
-#define NUM_TLC59401 1
+#define NUM_TLC59401 4
 #define timeout 1000	// set UART timeout in ms
 
 #define MODE	2	// GS or DC mode
@@ -43,7 +45,7 @@
 #define pwm_polarisation		10	// PWM Channel for LEDs with pol-filter	   ( TIMER3A )
 
 // create objects
-Driver tlc = Driver(NUM_TLC59401, SCLK, DATA, LATCH);
+Driver tlc = Driver(NUM_TLC59401, SCLK, DATA, LATCH, MODE);
 Functions ser = Functions();
 PWM pwm = PWM(pwm_non_polarisation, pwm_polarisation);
 
@@ -51,15 +53,16 @@ PWM pwm = PWM(pwm_non_polarisation, pwm_polarisation);
 volatile uint8_t transmit_started = 0;
 volatile uint8_t uart_timeout = 0;
 
+
+
 void setup()
 {
 	// force off outputs
-	if (BLANK >= 0) {pinMode(BLANK,OUTPUT); digitalWrite(BLANK, LOW);}
-	// setting  GS mode
-	pinMode(MODE,OUTPUT); digitalWrite(MODE,LOW);
+	pinMode(BLANK,OUTPUT); digitalWrite(BLANK, LOW);
 	
 	tlc.begin();
 	tlc.reset_all();
+	digitalWrite(BLANK, HIGH);
 	pwm.Init();
 	pwm.Reset();	
 	
@@ -67,8 +70,11 @@ void setup()
 	Serial.begin(BaudRate);
 	while(!Serial);
 
+	Serial.println("---------------------------------");
 	Serial.println("Ring light ready!");	
+	Serial.println("Type 'HELP' for more information.");
 	Serial.println("Input expected:");
+	Serial.println("---------------------------------");
 }
 	
 void serialEvent()
@@ -94,6 +100,10 @@ void serialEvent()
 void loop()
 {
 	cli();
+	
+	// Check Error Flag (toDo)
+	
+
 	if(Serial.available()>0)
 		serialEvent();
 	if (ser.m_stringComplete)
@@ -105,8 +115,10 @@ void loop()
 			digitalWrite(BLANK, LOW);
 			tlc.reset_all();
 			pwm.Reset();	
-			Serial.print("+Reset\r");	
-		}
+			Serial.println("+Reset");	
+		}		
+		// Print information
+		if (ser.Help());
 		// Set LEDs for shadow detection (Driver)		
 		else if(ser.Check_Input()) 
 		{	
@@ -130,17 +142,26 @@ void loop()
 			ser.Check_PolarisationValue();
 			pwm.setPWM_2(ser.m_pol_val);
 		}
+		// toggle Pin (ex.: toggle01 -> pin 0 to HIGH)
+		else if (ser.Toggle())
+		{
+			Serial.println("Toggle pin");
+		}
 		// String does not match anything
 		else
 		{
-			Serial.print("Ups.. String doesn't match!\r");
+			Serial.println("Ups.. String doesn't match!");
 			ser.m_inputString = "";
 			ser.m_stringComplete = false;
 			digitalWrite(BLANK,LOW);
-		}				
+		}
+		
+					
 	}
 	sei();
 }
+
+
 
 // ToDo: Neuen Timer für Timeout festlegen. Timer/Counter 3 ist für PWM an Pin 5 reserviert.
 /*

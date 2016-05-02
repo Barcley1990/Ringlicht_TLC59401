@@ -5,7 +5,7 @@
     <ProjectVersion>6.2</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
     <ProjectGuid>{9828f962-558c-4ba0-aac2-d5e3a7779fe8}</ProjectGuid>
-    <avrdevice>atmega32u4</avrdevice>
+    <avrdevice>atmega328p</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
     <Language>CPP</Language>
@@ -76,16 +76,14 @@
   <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
   <avrgcc.compiler.symbols.DefSymbols>
     <ListValues>
-      <Value>__AVR_ATmega32u4__</Value>
-      <Value>__AVR_ATmega32U4__</Value>
-      <Value>ARDUINO=164</Value>
+      <Value>__AVR_ATmega328p__</Value>
+      <Value>__AVR_ATmega328P__</Value>
+      <Value>ARDUINO=161</Value>
       <Value>ARDUINO_MAIN</Value>
-      <Value>F_CPU=16000000L</Value>
+      <Value>F_CPU=18432000L</Value>
       <Value>__AVR__</Value>
-      <Value>ARDUINO_AVR_MICRO</Value>
+      <Value>ARDUINO_AVR_UNO</Value>
       <Value>ARDUINO_ARCH_AVR</Value>
-      <Value>USB_VID=0x2341</Value>
-      <Value>USB_PID=0x8037</Value>
     </ListValues>
   </avrgcc.compiler.symbols.DefSymbols>
   <avrgcc.compiler.directories.IncludePaths>
@@ -98,7 +96,7 @@
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>../../A_Ringlicht</Value>
-      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/micro</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
@@ -111,16 +109,14 @@
   <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
   <avrgcccpp.compiler.symbols.DefSymbols>
     <ListValues>
-      <Value>__AVR_ATmega32u4__</Value>
-      <Value>__AVR_ATmega32U4__</Value>
-      <Value>ARDUINO=164</Value>
+      <Value>__AVR_ATmega328p__</Value>
+      <Value>__AVR_ATmega328P__</Value>
+      <Value>ARDUINO=161</Value>
       <Value>ARDUINO_MAIN</Value>
-      <Value>F_CPU=16000000L</Value>
+      <Value>F_CPU=18432000L</Value>
       <Value>__AVR__</Value>
-      <Value>ARDUINO_AVR_MICRO</Value>
+      <Value>ARDUINO_AVR_UNO</Value>
       <Value>ARDUINO_ARCH_AVR</Value>
-      <Value>USB_VID=0x2341</Value>
-      <Value>USB_PID=0x8037</Value>
     </ListValues>
   </avrgcccpp.compiler.symbols.DefSymbols>
   <avrgcccpp.compiler.directories.IncludePaths>
@@ -133,7 +129,7 @@
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>../../A_Ringlicht</Value>
-      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/micro</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
@@ -145,51 +141,43 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/yun;../../A_Ringlicht;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/tobnu/Documents/Arduino/libraries;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/avr/;c:/program files (x86)/arduino/hardware/tools/avr/avr/;c:/program files (x86)/arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include/;;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/micro;{runtime.tools.avr-gcc.path}/avr/include/;{runtime.tools.avr-gcc.path}//avr/include/avr/;{runtime.tools.avr-gcc.path}/lib/gcc/avr/4.8.1/include;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/yun;../../A_Ringlicht;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/tobnu/Documents/Arduino/libraries;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/avr/;c:/program files (x86)/arduino/hardware/tools/avr/avr/;c:/program files (x86)/arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include/;;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/micro;{runtime.tools.avr-gcc.path}/avr/include/;{runtime.tools.avr-gcc.path}//avr/include/avr/;{runtime.tools.avr-gcc.path}/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;</VMSETTING_IncludePaths>
     <VisualMicroSettings>
       <VisualMicroSettings>
-        <arduino.board.name>micro</arduino.board.name>
-        <arduino.board.desc>Arduino Micro</arduino.board.desc>
-        <arduino.board.property_bag>name=Arduino Micro
+        <arduino.board.name>uno</arduino.board.name>
+        <arduino.board.desc>LED_Ringlicht</arduino.board.desc>
+        <arduino.board.property_bag>name=LED_Ringlicht
 vid.0=0x2341
-pid.0=0x0037
+pid.0=0x0043
 vid.1=0x2341
-pid.1=0x8037
+pid.1=0x0001
 vid.2=0x2A03
-pid.2=0x0037
-vid.3=0x2A03
-pid.3=0x8037
+pid.2=0x0043
+vid.0x2A03.warning=Uncertified
 upload.tool=avrdude
-upload.protocol=avr109
-upload.maximum_size=28672
-upload.maximum_data_size=2560
-upload.speed=57600
-upload.disable_flushing=true
-upload.use_1200bps_touch=true
-upload.wait_for_upload_port=true
+upload.protocol=arduino
+upload.maximum_size=32256
+upload.maximum_data_size=2048
+upload.speed=115200
 bootloader.tool=avrdude
-bootloader.low_fuses=0xff
-bootloader.high_fuses=0xd8
-bootloader.extended_fuses=0xcb
-bootloader.file=caterina/Caterina-Micro.hex
+bootloader.low_fuses=0xFF
+bootloader.high_fuses=0xDE
+bootloader.extended_fuses=0x05
 bootloader.unlock_bits=0x3F
-bootloader.lock_bits=0x2F
-build.mcu=atmega32u4
-build.f_cpu=16000000L
-build.vid=0x2341
-build.pid=0x8037
-build.usb_product="Arduino Micro"
-build.board=AVR_MICRO
+bootloader.lock_bits=0x0F
+bootloader.file=optiboot/optiboot_atmega328.hex
+build.mcu=atmega328p
+build.f_cpu=18432000L
+build.board=AVR_UNO
 build.core=arduino
-build.variant=micro
-build.extra_flags={build.usb_flags}
+build.variant=standard
 runtime.ide.path=C:\Program Files (x86)\Arduino
 build.system.path=C:\Program Files (x86)\Arduino\hardware\arduino\avr\system
-runtime.ide.version=164
+runtime.ide.version=161
 target_package=arduino
 target_platform=avr
 runtime.hardware.path=C:\Program Files (x86)\Arduino\hardware\arduino
-originalid=micro
+originalid=uno
 intellisense.tools.path={runtime.tools.avr-gcc.path}/
 intellisense.include.paths={intellisense.tools.path}avr/include/;{intellisense.tools.path}/avr/include/avr/;{intellisense.tools.path}lib\gcc\avr\4.8.1\include
 tools.atprogram.cmd.path=%AVRSTUDIO_EXE_PATH%\atbackend\atprogram
@@ -198,20 +186,15 @@ tools.atprogram.program.params.verbose=-v
 tools.atprogram.program.params.quiet=-q
 tools.atprogram.program.pattern="{cmd.path}" -d {build.mcu} {program.verbose} {program.extra_params} program -c -f "{build.path}\{build.project_name}.hex"
 tools.atprogram.program.xpattern="{cmd.path}" {AVRSTUDIO_BACKEND_CONNECTION} -d {build.mcu} {program.verbose} {program.extra_params} program -c -f "{build.path}\{build.project_name}.hex"
-version=1.6.7
-compiler.warning_flags=-w
-compiler.warning_flags.none=-w
-compiler.warning_flags.default=
-compiler.warning_flags.more=-Wall
-compiler.warning_flags.all=-Wall -Wextra
-compiler.path={runtime.tools.avr-gcc.path}/bin/
+version=1.6.1
+compiler.path={runtime.ide.path}/hardware/tools/avr/bin/
 compiler.c.cmd=avr-gcc
-compiler.c.flags=-c -g -Os {compiler.warning_flags} -ffunction-sections -fdata-sections -MMD
-compiler.c.elf.flags={compiler.warning_flags} -Os -Wl,--gc-sections
+compiler.c.flags=-c -g -Os -w -ffunction-sections -fdata-sections -MMD
+compiler.c.elf.flags=-w -Os -Wl,--gc-sections
 compiler.c.elf.cmd=avr-gcc
 compiler.S.flags=-c -g -x assembler-with-cpp
 compiler.cpp.cmd=avr-g++
-compiler.cpp.flags=-c -g -Os {compiler.warning_flags} -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD
+compiler.cpp.flags=-c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD
 compiler.ar.cmd=avr-ar
 compiler.ar.flags=rcs
 compiler.objcopy.cmd=avr-objcopy
@@ -220,6 +203,7 @@ compiler.elf2hex.flags=-O ihex -R .eeprom
 compiler.elf2hex.cmd=avr-objcopy
 compiler.ldflags=
 compiler.size.cmd=avr-size
+build.extra_flags=
 compiler.c.extra_flags=
 compiler.c.elf.extra_flags=
 compiler.S.extra_flags=
@@ -238,9 +222,8 @@ recipe.size.pattern="{compiler.path}{compiler.size.cmd}" -A "{build.path}/{build
 recipe.size.regex=^(?:\.text|\.data|\.bootloader)\s+([0-9]+).*
 recipe.size.regex.data=^(?:\.data|\.bss|\.noinit)\s+([0-9]+).*
 recipe.size.regex.eeprom=^(?:\.eeprom)\s+([0-9]+).*
-tools.avrdude.path={runtime.tools.avrdude.path}
-tools.avrdude.cmd.path={path}/bin/avrdude
-tools.avrdude.config.path={path}/etc/avrdude.conf
+tools.avrdude.cmd.path={runtime.ide.path}/hardware/tools/avr/bin/avrdude
+tools.avrdude.config.path={runtime.ide.path}/hardware/tools/avr/etc/avrdude.conf
 tools.avrdude.upload.params.verbose=-v
 tools.avrdude.upload.params.quiet=-q -q
 tools.avrdude.upload.pattern="{cmd.path}" "-C{config.path}" {upload.verbose} -p{build.mcu} -c{upload.protocol} -P{serial.port} -b{upload.speed} -D "-Uflash:w:{build.path}/{build.project_name}.hex:i"
@@ -256,10 +239,6 @@ tools.avrdude.bootloader.pattern="{cmd.path}" "-C{config.path}" {bootloader.verb
 build.usb_manufacturer="Unknown"
 build.usb_flags=-DUSB_VID={build.vid} -DUSB_PID={build.pid} '-DUSB_MANUFACTURER={build.usb_manufacturer}' '-DUSB_PRODUCT={build.usb_product}'
 vm.platform.root.path=C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\arduino16x
-runtime.tools.avrdude.path=C:\Program Files (x86)\Arduino\hardware\tools\avr
-runtime.tools.avrdude-6.0.1-arduino5.path=C:\Program Files (x86)\Arduino\hardware\tools\avr
-runtime.tools.avr-gcc.path=C:\Program Files (x86)\Arduino\hardware\tools\avr
-runtime.tools.avr-gcc-4.8.1-arduino5.path=C:\Program Files (x86)\Arduino\hardware\tools\avr
 ide.hint=Arduino 1.6.x ide with support for downloaded Board Manager custom tools and hardware
 ide.location.key=Arduino16x
 ide.location.ide.winreg=Arduino 1.6.x Application
@@ -270,6 +249,7 @@ ide.default.package=arduino
 ide.default.platform=avr
 ide.multiplatform=true
 ide.includes=arduino.h
+ide.exe_name=arduino
 ide.platformswithoutpackage=false
 ide.includes.fallback=wprogram.h
 ide.extension=ino
@@ -285,9 +265,11 @@ ssh.user.name=root
 ssh.user.default.password=arduino
 ssh.host.wwwfiles.path=/www/sd
 build.working_directory={runtime.ide.path}
+ide.location.preferences.portable={runtime.ide.path}\portable
 ide.location.preferences=%VM_APPDATA_ROAMING%\arduino15\preferences.txt
-ide.location.preferences_fallback=%VM_APPDATA_ROAMING%\arduino\preferences.txt
-ide.location.contributions=%VM_APPDATA_ROAMING%\arduino15
+ide.location.preferences_fallback=%VM_APPDATA_LOCAL%\arduino15\preferences.txt
+ide.location.contributions=%VM_APPDATA_LOCAL%\arduino15
+ide.location.contributions_fallback=%VM_APPDATA_ROAMING%\arduino15
 ide.contributions.boards.allow=true
 ide.contributions.boards.ignore_unless_rewrite_found=true
 ide.contributions.libraries.allow=true
@@ -299,17 +281,38 @@ vm.boardsource.path=C:\Program Files (x86)\Arduino\hardware\arduino\avr
 runtime.platform.path=C:\Program Files (x86)\Arduino\hardware\arduino\avr
 vm.platformname.name=avr
 build.arch=AVR
+build.architecture=avr
+vmresolved.compiler.path=C:\Program Files (x86)\Arduino\hardware\tools\avr\bin\
+vmresolved.tools.path=C:\Program Files (x86)\Arduino\hardware\tools\avr
+vm.runtime.compiler.showwarnings=false
+serial.port.file=COM4
+serial.port=COM4
+serial.port.num=4
+build.source.path=C:\Users\tobnu\Documents\Arduino\PlatinenTest\PlatinenTest.ino
+extra.time.local=31821406
+includes= -I"C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino"  -I"C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard" 
+build.path=C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\uno
+build.project_name=PlatinenTest
+build.variant.path=C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard
+build.core.path=C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino
+archive_file=core.a
+build.path_sketch=C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\uno
+build.path_core=C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\uno
+build.path_libraries=C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\uno
+object_file=C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\uno\PlatinenTest.cpp.o
+source_file=C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\uno\PlatinenTest.cpp
+object_files="C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\uno\PlatinenTest.cpp.o" 
 </arduino.board.property_bag>
-        <arduino.build.mcu>atmega32u4</arduino.build.mcu>
-        <arduino.build.f_cpu>16000000L</arduino.build.f_cpu>
+        <arduino.build.mcu>atmega328p</arduino.build.mcu>
+        <arduino.build.f_cpu>18432000L</arduino.build.f_cpu>
         <arduino.build.core>arduino</arduino.build.core>
-        <arduino.upload.protocol>avr109</arduino.upload.protocol>
-        <arduino.upload.speed>57600</arduino.upload.speed>
-        <arduino.upload.maximum_size>28672</arduino.upload.maximum_size>
+        <arduino.upload.protocol>arduino</arduino.upload.protocol>
+        <arduino.upload.speed>115200</arduino.upload.speed>
+        <arduino.upload.maximum_size>32256</arduino.upload.maximum_size>
         <visualmicro.application.name>arduino16x</visualmicro.application.name>
         <visualmicro.package.name>arduino</visualmicro.package.name>
         <visualmicro.platform.name>avr</visualmicro.platform.name>
-        <arduino.upload.port>COM17</arduino.upload.port>
+        <arduino.upload.port>COM4</arduino.upload.port>
       </VisualMicroSettings>
     </VisualMicroSettings>
   </PropertyGroup>
@@ -325,16 +328,14 @@ build.arch=AVR
   <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
   <avrgcc.compiler.symbols.DefSymbols>
     <ListValues>
-      <Value>__AVR_ATmega32u4__</Value>
-      <Value>__AVR_ATmega32U4__</Value>
-      <Value>ARDUINO=164</Value>
+      <Value>__AVR_ATmega328p__</Value>
+      <Value>__AVR_ATmega328P__</Value>
+      <Value>ARDUINO=161</Value>
       <Value>ARDUINO_MAIN</Value>
-      <Value>F_CPU=16000000L</Value>
+      <Value>F_CPU=18432000L</Value>
       <Value>__AVR__</Value>
-      <Value>ARDUINO_AVR_MICRO</Value>
+      <Value>ARDUINO_AVR_UNO</Value>
       <Value>ARDUINO_ARCH_AVR</Value>
-      <Value>USB_VID=0x2341</Value>
-      <Value>USB_PID=0x8037</Value>
     </ListValues>
   </avrgcc.compiler.symbols.DefSymbols>
   <avrgcc.compiler.directories.IncludePaths>
@@ -347,7 +348,7 @@ build.arch=AVR
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>../../A_Ringlicht</Value>
-      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/micro</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
@@ -360,16 +361,14 @@ build.arch=AVR
   <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
   <avrgcccpp.compiler.symbols.DefSymbols>
     <ListValues>
-      <Value>__AVR_ATmega32u4__</Value>
-      <Value>__AVR_ATmega32U4__</Value>
-      <Value>ARDUINO=164</Value>
+      <Value>__AVR_ATmega328p__</Value>
+      <Value>__AVR_ATmega328P__</Value>
+      <Value>ARDUINO=161</Value>
       <Value>ARDUINO_MAIN</Value>
-      <Value>F_CPU=16000000L</Value>
+      <Value>F_CPU=18432000L</Value>
       <Value>__AVR__</Value>
-      <Value>ARDUINO_AVR_MICRO</Value>
+      <Value>ARDUINO_AVR_UNO</Value>
       <Value>ARDUINO_ARCH_AVR</Value>
-      <Value>USB_VID=0x2341</Value>
-      <Value>USB_PID=0x8037</Value>
     </ListValues>
   </avrgcccpp.compiler.symbols.DefSymbols>
   <avrgcccpp.compiler.directories.IncludePaths>
@@ -382,7 +381,7 @@ build.arch=AVR
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>../../A_Ringlicht</Value>
-      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/micro</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
@@ -394,51 +393,43 @@ build.arch=AVR
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/yun;../../A_Ringlicht;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/tobnu/Documents/Arduino/libraries;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/avr/;c:/program files (x86)/arduino/hardware/tools/avr/avr/;c:/program files (x86)/arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include/;;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/micro;{runtime.tools.avr-gcc.path}/avr/include/;{runtime.tools.avr-gcc.path}//avr/include/avr/;{runtime.tools.avr-gcc.path}/lib/gcc/avr/4.8.1/include;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/yun;../../A_Ringlicht;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/tobnu/Documents/Arduino/libraries;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/avr/;c:/program files (x86)/arduino/hardware/tools/avr/avr/;c:/program files (x86)/arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include/;;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/micro;{runtime.tools.avr-gcc.path}/avr/include/;{runtime.tools.avr-gcc.path}//avr/include/avr/;{runtime.tools.avr-gcc.path}/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;</VMSETTING_IncludePaths>
     <VisualMicroSettings>
       <VisualMicroSettings>
-        <arduino.board.name>micro</arduino.board.name>
-        <arduino.board.desc>Arduino Micro</arduino.board.desc>
-        <arduino.board.property_bag>name=Arduino Micro
+        <arduino.board.name>uno</arduino.board.name>
+        <arduino.board.desc>LED_Ringlicht</arduino.board.desc>
+        <arduino.board.property_bag>name=LED_Ringlicht
 vid.0=0x2341
-pid.0=0x0037
+pid.0=0x0043
 vid.1=0x2341
-pid.1=0x8037
+pid.1=0x0001
 vid.2=0x2A03
-pid.2=0x0037
-vid.3=0x2A03
-pid.3=0x8037
+pid.2=0x0043
+vid.0x2A03.warning=Uncertified
 upload.tool=avrdude
-upload.protocol=avr109
-upload.maximum_size=28672
-upload.maximum_data_size=2560
-upload.speed=57600
-upload.disable_flushing=true
-upload.use_1200bps_touch=true
-upload.wait_for_upload_port=true
+upload.protocol=arduino
+upload.maximum_size=32256
+upload.maximum_data_size=2048
+upload.speed=115200
 bootloader.tool=avrdude
-bootloader.low_fuses=0xff
-bootloader.high_fuses=0xd8
-bootloader.extended_fuses=0xcb
-bootloader.file=caterina/Caterina-Micro.hex
+bootloader.low_fuses=0xFF
+bootloader.high_fuses=0xDE
+bootloader.extended_fuses=0x05
 bootloader.unlock_bits=0x3F
-bootloader.lock_bits=0x2F
-build.mcu=atmega32u4
-build.f_cpu=16000000L
-build.vid=0x2341
-build.pid=0x8037
-build.usb_product="Arduino Micro"
-build.board=AVR_MICRO
+bootloader.lock_bits=0x0F
+bootloader.file=optiboot/optiboot_atmega328.hex
+build.mcu=atmega328p
+build.f_cpu=18432000L
+build.board=AVR_UNO
 build.core=arduino
-build.variant=micro
-build.extra_flags={build.usb_flags}
+build.variant=standard
 runtime.ide.path=C:\Program Files (x86)\Arduino
 build.system.path=C:\Program Files (x86)\Arduino\hardware\arduino\avr\system
-runtime.ide.version=164
+runtime.ide.version=161
 target_package=arduino
 target_platform=avr
 runtime.hardware.path=C:\Program Files (x86)\Arduino\hardware\arduino
-originalid=micro
+originalid=uno
 intellisense.tools.path={runtime.tools.avr-gcc.path}/
 intellisense.include.paths={intellisense.tools.path}avr/include/;{intellisense.tools.path}/avr/include/avr/;{intellisense.tools.path}lib\gcc\avr\4.8.1\include
 tools.atprogram.cmd.path=%AVRSTUDIO_EXE_PATH%\atbackend\atprogram
@@ -447,20 +438,15 @@ tools.atprogram.program.params.verbose=-v
 tools.atprogram.program.params.quiet=-q
 tools.atprogram.program.pattern="{cmd.path}" -d {build.mcu} {program.verbose} {program.extra_params} program -c -f "{build.path}\{build.project_name}.hex"
 tools.atprogram.program.xpattern="{cmd.path}" {AVRSTUDIO_BACKEND_CONNECTION} -d {build.mcu} {program.verbose} {program.extra_params} program -c -f "{build.path}\{build.project_name}.hex"
-version=1.6.7
-compiler.warning_flags=-w
-compiler.warning_flags.none=-w
-compiler.warning_flags.default=
-compiler.warning_flags.more=-Wall
-compiler.warning_flags.all=-Wall -Wextra
-compiler.path={runtime.tools.avr-gcc.path}/bin/
+version=1.6.1
+compiler.path={runtime.ide.path}/hardware/tools/avr/bin/
 compiler.c.cmd=avr-gcc
-compiler.c.flags=-c -g -Os {compiler.warning_flags} -ffunction-sections -fdata-sections -MMD
-compiler.c.elf.flags={compiler.warning_flags} -Os -Wl,--gc-sections
+compiler.c.flags=-c -g -Os -w -ffunction-sections -fdata-sections -MMD
+compiler.c.elf.flags=-w -Os -Wl,--gc-sections
 compiler.c.elf.cmd=avr-gcc
 compiler.S.flags=-c -g -x assembler-with-cpp
 compiler.cpp.cmd=avr-g++
-compiler.cpp.flags=-c -g -Os {compiler.warning_flags} -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD
+compiler.cpp.flags=-c -g -Os -w -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD
 compiler.ar.cmd=avr-ar
 compiler.ar.flags=rcs
 compiler.objcopy.cmd=avr-objcopy
@@ -469,6 +455,7 @@ compiler.elf2hex.flags=-O ihex -R .eeprom
 compiler.elf2hex.cmd=avr-objcopy
 compiler.ldflags=
 compiler.size.cmd=avr-size
+build.extra_flags=
 compiler.c.extra_flags=
 compiler.c.elf.extra_flags=
 compiler.S.extra_flags=
@@ -487,9 +474,8 @@ recipe.size.pattern="{compiler.path}{compiler.size.cmd}" -A "{build.path}/{build
 recipe.size.regex=^(?:\.text|\.data|\.bootloader)\s+([0-9]+).*
 recipe.size.regex.data=^(?:\.data|\.bss|\.noinit)\s+([0-9]+).*
 recipe.size.regex.eeprom=^(?:\.eeprom)\s+([0-9]+).*
-tools.avrdude.path={runtime.tools.avrdude.path}
-tools.avrdude.cmd.path={path}/bin/avrdude
-tools.avrdude.config.path={path}/etc/avrdude.conf
+tools.avrdude.cmd.path={runtime.ide.path}/hardware/tools/avr/bin/avrdude
+tools.avrdude.config.path={runtime.ide.path}/hardware/tools/avr/etc/avrdude.conf
 tools.avrdude.upload.params.verbose=-v
 tools.avrdude.upload.params.quiet=-q -q
 tools.avrdude.upload.pattern="{cmd.path}" "-C{config.path}" {upload.verbose} -p{build.mcu} -c{upload.protocol} -P{serial.port} -b{upload.speed} -D "-Uflash:w:{build.path}/{build.project_name}.hex:i"
@@ -505,10 +491,6 @@ tools.avrdude.bootloader.pattern="{cmd.path}" "-C{config.path}" {bootloader.verb
 build.usb_manufacturer="Unknown"
 build.usb_flags=-DUSB_VID={build.vid} -DUSB_PID={build.pid} '-DUSB_MANUFACTURER={build.usb_manufacturer}' '-DUSB_PRODUCT={build.usb_product}'
 vm.platform.root.path=C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\arduino16x
-runtime.tools.avrdude.path=C:\Program Files (x86)\Arduino\hardware\tools\avr
-runtime.tools.avrdude-6.0.1-arduino5.path=C:\Program Files (x86)\Arduino\hardware\tools\avr
-runtime.tools.avr-gcc.path=C:\Program Files (x86)\Arduino\hardware\tools\avr
-runtime.tools.avr-gcc-4.8.1-arduino5.path=C:\Program Files (x86)\Arduino\hardware\tools\avr
 ide.hint=Arduino 1.6.x ide with support for downloaded Board Manager custom tools and hardware
 ide.location.key=Arduino16x
 ide.location.ide.winreg=Arduino 1.6.x Application
@@ -519,6 +501,7 @@ ide.default.package=arduino
 ide.default.platform=avr
 ide.multiplatform=true
 ide.includes=arduino.h
+ide.exe_name=arduino
 ide.platformswithoutpackage=false
 ide.includes.fallback=wprogram.h
 ide.extension=ino
@@ -534,9 +517,11 @@ ssh.user.name=root
 ssh.user.default.password=arduino
 ssh.host.wwwfiles.path=/www/sd
 build.working_directory={runtime.ide.path}
+ide.location.preferences.portable={runtime.ide.path}\portable
 ide.location.preferences=%VM_APPDATA_ROAMING%\arduino15\preferences.txt
-ide.location.preferences_fallback=%VM_APPDATA_ROAMING%\arduino\preferences.txt
-ide.location.contributions=%VM_APPDATA_ROAMING%\arduino15
+ide.location.preferences_fallback=%VM_APPDATA_LOCAL%\arduino15\preferences.txt
+ide.location.contributions=%VM_APPDATA_LOCAL%\arduino15
+ide.location.contributions_fallback=%VM_APPDATA_ROAMING%\arduino15
 ide.contributions.boards.allow=true
 ide.contributions.boards.ignore_unless_rewrite_found=true
 ide.contributions.libraries.allow=true
@@ -548,17 +533,38 @@ vm.boardsource.path=C:\Program Files (x86)\Arduino\hardware\arduino\avr
 runtime.platform.path=C:\Program Files (x86)\Arduino\hardware\arduino\avr
 vm.platformname.name=avr
 build.arch=AVR
+build.architecture=avr
+vmresolved.compiler.path=C:\Program Files (x86)\Arduino\hardware\tools\avr\bin\
+vmresolved.tools.path=C:\Program Files (x86)\Arduino\hardware\tools\avr
+vm.runtime.compiler.showwarnings=false
+serial.port.file=COM4
+serial.port=COM4
+serial.port.num=4
+build.source.path=C:\Users\tobnu\Documents\Arduino\PlatinenTest\PlatinenTest.ino
+extra.time.local=31821406
+includes= -I"C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino"  -I"C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard" 
+build.path=C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\uno
+build.project_name=PlatinenTest
+build.variant.path=C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard
+build.core.path=C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino
+archive_file=core.a
+build.path_sketch=C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\uno
+build.path_core=C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\uno
+build.path_libraries=C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\uno
+object_file=C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\uno\PlatinenTest.cpp.o
+source_file=C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\uno\PlatinenTest.cpp
+object_files="C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\uno\PlatinenTest.cpp.o" 
 </arduino.board.property_bag>
-        <arduino.build.mcu>atmega32u4</arduino.build.mcu>
-        <arduino.build.f_cpu>16000000L</arduino.build.f_cpu>
+        <arduino.build.mcu>atmega328p</arduino.build.mcu>
+        <arduino.build.f_cpu>18432000L</arduino.build.f_cpu>
         <arduino.build.core>arduino</arduino.build.core>
-        <arduino.upload.protocol>avr109</arduino.upload.protocol>
-        <arduino.upload.speed>57600</arduino.upload.speed>
-        <arduino.upload.maximum_size>28672</arduino.upload.maximum_size>
+        <arduino.upload.protocol>arduino</arduino.upload.protocol>
+        <arduino.upload.speed>115200</arduino.upload.speed>
+        <arduino.upload.maximum_size>32256</arduino.upload.maximum_size>
         <visualmicro.application.name>arduino16x</visualmicro.application.name>
         <visualmicro.package.name>arduino</visualmicro.package.name>
         <visualmicro.platform.name>avr</visualmicro.platform.name>
-        <arduino.upload.port>COM17</arduino.upload.port>
+        <arduino.upload.port>COM4</arduino.upload.port>
       </VisualMicroSettings>
     </VisualMicroSettings>
   </PropertyGroup>
@@ -731,9 +737,9 @@ build.arch=AVR
       <SubType>compile</SubType>
       <Link>src\sketch-api-readonly\core\WString.h</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\..\..\Program Files %28x86%29\Arduino\hardware\arduino\avr\variants\micro\pins_arduino.h">
+    <Compile Include="..\..\..\..\..\..\..\Program Files %28x86%29\Arduino\hardware\arduino\avr\variants\standard\pins_arduino.h">
       <SubType>compile</SubType>
-      <Link>src\sketch-api-readonly\variants\micro\pins_arduino.h</Link>
+      <Link>src\sketch-api-readonly\variants\standard\pins_arduino.h</Link>
     </Compile>
     <Compile Include="A_Ringlicht.ino">
       <SubType>compile</SubType>
@@ -766,7 +772,7 @@ build.arch=AVR
     <Folder Include="src\sketch-api-readonly\core\" />
     <Folder Include="src\sketch-api-readonly\libraries\" />
     <Folder Include="src\sketch-api-readonly\variants\" />
-    <Folder Include="src\sketch-api-readonly\variants\micro\" />
+    <Folder Include="src\sketch-api-readonly\variants\standard\" />
     <Folder Include="Visual Micro\" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
