@@ -1,3 +1,4 @@
+
 /*
  * A_Ringlicht.ino
  *
@@ -40,6 +41,7 @@
 #define SCLK	5	// Serial Clock (SCLK)
 #define LATCH   6	// Latch (XLAT)
 #define BLANK	7	// set to -1 to not use the enable pin (its optional).
+#define GCLK	8
 /* N.B. The PWM is just working with this PIN configuration! */
 #define pwm_non_polarisation	9	// PWM Channel for LEDs without pol-filter ( TIMER1A )
 #define pwm_polarisation		10	// PWM Channel for LEDs with pol-filter	   ( TIMER3A )
@@ -54,27 +56,32 @@ volatile uint8_t transmit_started = 0;
 volatile uint8_t uart_timeout = 0;
 
 
-
 void setup()
 {
 	// force off outputs
 	pinMode(BLANK,OUTPUT); digitalWrite(BLANK, LOW);
 	
-	tlc.begin();
-	tlc.reset_all();
-	digitalWrite(BLANK, HIGH);
-	pwm.Init();
-	pwm.Reset();	
-	
 	// Init UART
 	Serial.begin(BaudRate);
 	while(!Serial);
+	
+	// Init Driver
+	if(tlc.begin());
+	tlc.reset_all();
+	
+	// Init PWM
+	//pwm.Init();
+	//pwm.Reset();	
 
 	Serial.println("---------------------------------");
 	Serial.println("Ring light ready!");	
 	Serial.println("Type 'HELP' for more information.");
 	Serial.println("Input expected:");
 	Serial.println("---------------------------------");
+	
+	delay(500);
+	
+	//tlc.full_brightness();
 }
 	
 void serialEvent()
@@ -99,10 +106,11 @@ void serialEvent()
 
 void loop()
 {
-	cli();
+	//cli();
 	
 	// Check Error Flag (toDo)
 	
+
 
 	if(Serial.available()>0)
 		serialEvent();
@@ -110,55 +118,44 @@ void loop()
 	{
 		Serial.print("got something: ");
 		// check if RESET was insert	
-		if (ser.Check_Reset())
-		{	
-			digitalWrite(BLANK, LOW);
+		if (ser.Check_Reset()){				
 			tlc.reset_all();
 			pwm.Reset();	
 			Serial.println("+Reset");	
 		}		
 		// Print information
-		if (ser.Help());
+		else if (ser.Help());
 		// Set LEDs for shadow detection (Driver)		
-		else if(ser.Check_Input()) 
-		{	
+		else if(ser.Check_Input()) {	
 			ser.Check_LedValue();
 			// set LED
 			tlc.setPWM(ser.m_led, ser.m_val);
-			tlc.write();
-			digitalWrite(BLANK,HIGH);						
+			tlc.write();					
 		}
 		// set LEDs for Polarization effect (MosFet)
-		else if (ser.Check_Polarisation_1())
-		{
+		else if (ser.Check_Polarisation_1()){
 			Serial.print("NPOLY ");
 			ser.Check_PolarisationValue();
 			pwm.setPWM_1(ser.m_pol_val);
 		}
 		// set LEDs for Polarization effect (MosFet)
-		else if (ser.Check_Polarisation_2())
-		{
+		else if (ser.Check_Polarisation_2()){
 			Serial.print("YPOLY ");
 			ser.Check_PolarisationValue();
 			pwm.setPWM_2(ser.m_pol_val);
 		}
 		// toggle Pin (ex.: toggle01 -> pin 0 to HIGH)
-		else if (ser.Toggle())
-		{
+		else if (ser.Toggle()){
 			Serial.println("Toggle pin");
 		}
 		// String does not match anything
-		else
-		{
-			Serial.println("Ups.. String doesn't match!");
+		else {	
+			Serial.println("String doesn't match!");
 			ser.m_inputString = "";
 			ser.m_stringComplete = false;
-			digitalWrite(BLANK,LOW);
-		}
-		
-					
+		}	
 	}
-	sei();
+	//sei();
 }
 
 

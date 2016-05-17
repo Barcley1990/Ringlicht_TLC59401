@@ -34,7 +34,7 @@
         <documentation help="" />
         <offline-documentation help="" />
         <dependencies>
-          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.10.1" />
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.21.0" />
         </dependencies>
       </framework-data>
     </AsfFrameworkConfig>
@@ -48,13 +48,13 @@
         <InterfaceName>ISP</InterfaceName>
       </ToolOptions>
       <ToolType>com.atmel.avrdbg.tool.ispmk2</ToolType>
-      <ToolNumber>000200027071</ToolNumber>
+      <ToolNumber>000200184738</ToolNumber>
       <ToolName>AVRISP mkII</ToolName>
     </com_atmel_avrdbg_tool_ispmk2>
     <com_atmel_avrdbg_tool_stk500>
       <ToolOptions>
         <InterfaceProperties>
-          <IspClock>125000</IspClock>
+          <IspClock>0</IspClock>
         </InterfaceProperties>
         <InterfaceName>ISP</InterfaceName>
       </ToolOptions>
@@ -63,6 +63,9 @@
       </ToolNumber>
       <ToolName>STK500</ToolName>
     </com_atmel_avrdbg_tool_stk500>
+    <avrtoolserialnumber>000200184738</avrtoolserialnumber>
+    <avrdeviceexpectedsignature>0x1E950F</avrdeviceexpectedsignature>
+    <avrtoolinterfaceclock>125000</avrtoolinterfaceclock>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -93,7 +96,7 @@
       <Value>{runtime.tools.avr-gcc.path}//avr/include/avr/</Value>
       <Value>{runtime.tools.avr-gcc.path}/avr/include/</Value>
       <Value>C:/Users/tobnu/Documents/Arduino/libraries</Value>
-      <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
+      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/2hf4kule.1xb/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>../../A_Ringlicht</Value>
@@ -127,7 +130,7 @@
       <Value>{runtime.tools.avr-gcc.path}//avr/include/avr/</Value>
       <Value>{runtime.tools.avr-gcc.path}/avr/include/</Value>
       <Value>C:/Users/tobnu/Documents/Arduino/libraries</Value>
-      <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
+      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/2hf4kule.1xb/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>../../A_Ringlicht</Value>
@@ -149,7 +152,7 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/yun;../../A_Ringlicht;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/tobnu/Documents/Arduino/libraries;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/avr/;c:/program files (x86)/arduino/hardware/tools/avr/avr/;c:/program files (x86)/arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include/;;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/micro;{runtime.tools.avr-gcc.path}/avr/include/;{runtime.tools.avr-gcc.path}//avr/include/avr/;{runtime.tools.avr-gcc.path}/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/yun;../../A_Ringlicht;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/tobnu/Documents/Arduino/libraries;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/avr/;c:/program files (x86)/arduino/hardware/tools/avr/avr/;c:/program files (x86)/arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include/;;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/micro;{runtime.tools.avr-gcc.path}/avr/include/;{runtime.tools.avr-gcc.path}//avr/include/avr/;{runtime.tools.avr-gcc.path}/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/2hf4kule.1xb/Micro Platforms/default/debuggers;C:/Users/tobnu/Documents/Atmel Studio/7.0/A_Ringlicht/A_Ringlicht;C:/Users/tobnu/Documents/Arduino/libraries/TLC5941;C:/Users/tobnu/Documents/Arduino/libraries/TLC5941/utility;</VMSETTING_IncludePaths>
     <VisualMicroSettings>
       <VisualMicroSettings>
         <arduino.board.name>uno</arduino.board.name>
@@ -320,7 +323,7 @@ object_files="C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\u
         <visualmicro.application.name>arduino16x</visualmicro.application.name>
         <visualmicro.package.name>arduino</visualmicro.package.name>
         <visualmicro.platform.name>avr</visualmicro.platform.name>
-        <arduino.upload.port>COM4</arduino.upload.port>
+        <arduino.upload.port>COM3</arduino.upload.port>
       </VisualMicroSettings>
     </VisualMicroSettings>
   </PropertyGroup>
@@ -353,7 +356,7 @@ object_files="C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\u
       <Value>{runtime.tools.avr-gcc.path}//avr/include/avr/</Value>
       <Value>{runtime.tools.avr-gcc.path}/avr/include/</Value>
       <Value>C:/Users/tobnu/Documents/Arduino/libraries</Value>
-      <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
+      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/2hf4kule.1xb/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>../../A_Ringlicht</Value>
@@ -387,7 +390,7 @@ object_files="C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\u
       <Value>{runtime.tools.avr-gcc.path}//avr/include/avr/</Value>
       <Value>{runtime.tools.avr-gcc.path}/avr/include/</Value>
       <Value>C:/Users/tobnu/Documents/Arduino/libraries</Value>
-      <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
+      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/2hf4kule.1xb/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>../../A_Ringlicht</Value>
@@ -409,7 +412,7 @@ object_files="C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\u
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/yun;../../A_Ringlicht;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/tobnu/Documents/Arduino/libraries;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/avr/;c:/program files (x86)/arduino/hardware/tools/avr/avr/;c:/program files (x86)/arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include/;;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/micro;{runtime.tools.avr-gcc.path}/avr/include/;{runtime.tools.avr-gcc.path}//avr/include/avr/;{runtime.tools.avr-gcc.path}/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/yun;../../A_Ringlicht;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/tobnu/Documents/Arduino/libraries;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/;c:/program files (x86)/arduino/hardware/tools/avr/avr/include/avr/;c:/program files (x86)/arduino/hardware/tools/avr/avr/;c:/program files (x86)/arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include/;;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/micro;{runtime.tools.avr-gcc.path}/avr/include/;{runtime.tools.avr-gcc.path}//avr/include/avr/;{runtime.tools.avr-gcc.path}/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/2hf4kule.1xb/Micro Platforms/default/debuggers;C:/Users/tobnu/Documents/Atmel Studio/7.0/A_Ringlicht/A_Ringlicht;C:/Users/tobnu/Documents/Arduino/libraries/TLC5941;C:/Users/tobnu/Documents/Arduino/libraries/TLC5941/utility;</VMSETTING_IncludePaths>
     <VisualMicroSettings>
       <VisualMicroSettings>
         <arduino.board.name>uno</arduino.board.name>
@@ -580,7 +583,7 @@ object_files="C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\u
         <visualmicro.application.name>arduino16x</visualmicro.application.name>
         <visualmicro.package.name>arduino</visualmicro.package.name>
         <visualmicro.platform.name>avr</visualmicro.platform.name>
-        <arduino.upload.port>COM4</arduino.upload.port>
+        <arduino.upload.port>COM3</arduino.upload.port>
       </VisualMicroSettings>
     </VisualMicroSettings>
   </PropertyGroup>
@@ -778,7 +781,7 @@ object_files="C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\u
     <Compile Include="Driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Visual Micro\.A_Ringlicht.vsarduino.h">
+    <Compile Include="__vm\.A_Ringlicht.vsarduino.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
@@ -789,7 +792,7 @@ object_files="C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\u
     <Folder Include="src\sketch-api-readonly\libraries\" />
     <Folder Include="src\sketch-api-readonly\variants\" />
     <Folder Include="src\sketch-api-readonly\variants\standard\" />
-    <Folder Include="Visual Micro\" />
+    <Folder Include="__vm\" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

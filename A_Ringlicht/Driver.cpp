@@ -72,33 +72,84 @@ Driver::Driver(uint8_t n, uint8_t c, uint8_t d, uint8_t l, uint8_t m)
 The TLC59401 can adjust the brightness of each channel OUTn using a PWM control scheme. The use of 12
 bits per channel results in 4096 different brightness steps, from 0% to 100% brightness.
 Brightness in % = (GSn/4095) * 100
+Where: GSn = the programmed grayscale value for output n (GSn = 0 to 4095)
+	     n = 0 to 15
+		 Grayscale data for all OUTn 
+The input shift register enters grayscale data into the grayscale register for all channels simultaneously. 
+The complete grayscale data format consists of 16x12 bit words, which forms a 192-bit wide data packet. 
+The data packet must be clocked in MSB first.
 */
+
+#define MODE	2	// GS or DC mode
+#define XERR	3	// Reports the error flags
+#define DATA    4	// Serial Data In (SIN)
+#define SCLK	5	// Serial Clock (SCLK)
+#define LATCH   6	// Latch (XLAT)
+#define BLANK	7	// set to -1 to not use the enable pin (its optional).
+#define GCLK	8
+
+// The TLC59401 compares the grayscale
+// value of each output OUTn with the grayscale counter value.
+
 void Driver::write(void) 
 {
-digitalWrite(_lat, LOW);
+	// Disable outputs
+	digitalWrite(BLANK, LOW);
+	
+	// Clock in data
+	digitalWrite(_lat, LOW);
 	// 16 channels per TLC59401
-	for (int i=16*numdrivers-1; i>=0 ; i--) 
-	{
+	for (int i=16*numdrivers-1; i>=0 ; i--) {
 		// 12 bits per channel, send MSB first
-		for (int j=11; j>=0; j--) 
-		{
-			digitalWrite(_clk, LOW);
-			
+		for (int j=11; j>=0; j--) {
+			digitalWrite(_clk, LOW);					
 			if (pwmbuffer[i] & (1 << j))
-			{
 				digitalWrite(_dat, HIGH);
-			}
 			else
-			{
 				digitalWrite(_dat, LOW);
-			}
-			digitalWrite(_clk, HIGH);
+			digitalWrite(_clk, HIGH);			
 		}
 	}
-  digitalWrite(_clk, LOW);
+	digitalWrite(_clk, LOW);
+	// end of clocking in  
 
-  digitalWrite(_lat, HIGH); 
-  digitalWrite(_lat, LOW);
+	// latch the serial data into the grayscale register. New grayscale data immediately become valid at the rising edge of the XLAT
+	// signal; therefore, new grayscale data should be latched at the end of a grayscale cycle when BLANK is high.
+	digitalWrite(_lat, HIGH); 
+	digitalWrite(_lat, LOW);
+	// end of latching in
+	
+	digitalWrite(BLANK, HIGH);
+	for(int p=0;p<4096;p++){
+		digitalWrite(GCLK, HIGH);
+		digitalWrite(GCLK, LOW);
+	}
+}
+
+void Driver::update()
+{
+	
+}
+
+void Driver::setDotCorrection()
+{
+	setMode(DC);
+		
+	digitalWrite(_lat, LOW);
+	for (int i=0; i<96; i++)
+	{
+		digitalWrite(_clk, LOW);
+		digitalWrite(_dat, HIGH);
+		digitalWrite(_clk, HIGH);
+	}
+	digitalWrite(_lat, HIGH);
+	digitalWrite(_lat, LOW);
+
+	// The first GS data input cycle after dot correction requires an additional SCLK pulse after the XLAT signal to complete
+	// the grayscale update cycle.
+	digitalWrite(_clk, HIGH);
+	digitalWrite(_clk, LOW);
+	
 }
 
 void Driver::setPWM(uint8_t chan, uint16_t pwm) 
@@ -136,33 +187,39 @@ void Driver::setPWM(uint8_t chan, uint16_t pwm)
   pwmbuffer[ch+3] = pwm;
 }
 
+void Driver::test()
+{
+	for (uint8_t i=1; i<=16; i++)
+	{
+		setPWM(i, 1000);
+		write();
+		delay(500);
+		setPWM(i, 0);
+	}
+	
+}
+
 boolean Driver::begin() 
 {
-  if (!pwmbuffer) return false;
+  if (!pwmbuffer){
+	  Serial.println("pwmbuffer error");
+	  return false;
+  }
 
   pinMode(_clk, OUTPUT);
   pinMode(_dat, OUTPUT);
   pinMode(_lat, OUTPUT);
   pinMode(_mod, OUTPUT); 
+  digitalWrite(_lat, LOW);
   // setting  GS mode
   digitalWrite(_mod, LOW);
-  
-  digitalWrite(_lat, LOW);
-  for (int i=0; i<288; ++i)
-  {
-	digitalWrite(_clk,LOW);
-	digitalWrite(_dat,HIGH);
-	digitalWrite(_clk,LOW);
-  }
-	digitalWrite(_lat, HIGH);
-	digitalWrite(_lat, LOW);
 
   return true;
 }
 
 void Driver::full_brightness()
 {
-	for (int i=1; i<=8; i++)
+	for (int i=1; i<=16; i++)
 	{
 		setPWM(i,4095);
 	}
@@ -172,8 +229,16 @@ void Driver::full_brightness()
 void Driver::reset_all()
 {
 	for (int i=1; i<=16; i++)
-	{
 		setPWM(i,0);
-	}
 	write();
+}
+
+// DC mode or GS mode
+void Driver::setMode(uint8_t mode)
+{
+	digitalWrite(_lat, LOW);
+	if (mode==1)
+		digitalWrite(_mod, LOW);	// GS mode
+	else
+		digitalWrite(_mod, HIGH);	// DC mode	
 }

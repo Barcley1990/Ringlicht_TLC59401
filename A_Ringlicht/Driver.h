@@ -9,6 +9,8 @@
 
 #include <Arduino.h>
 
+#define GS 1
+#define DC 0
 
 class Driver
 {
@@ -21,11 +23,15 @@ class Driver
 	void write(void);
 	void reset_all();
 	void full_brightness();
-
+	void update();
+	void setMode(uint8_t mode);
+	void setDotCorrection();
+	void test();
 
 private:
 	uint16_t *pwmbuffer;
 	uint8_t numdrivers, _clk, _dat, _lat, _mod;
+	uint16_t value;
 
 };
 
