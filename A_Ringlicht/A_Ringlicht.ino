@@ -31,7 +31,7 @@
 #define LOW		0
 
 // How many boards do you have chained?
-#define NUM_TLC59401 4
+#define NUM_TLC59401 1
 #define timeout 1000	// set UART timeout in ms
 
 #define MODE	2	// GS or DC mode
