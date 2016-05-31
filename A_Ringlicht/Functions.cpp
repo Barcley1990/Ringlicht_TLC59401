@@ -219,7 +219,7 @@ bool Functions::Help(){
 	Serial.println("(4):NPOLYxxx");
 	Serial.println("(5):TOGGLExx");
 	Serial.println("");
-	Serial.println("(1):Reset all LEDs");
+	Serial.println("(1):Reset all LEDs to 0");
 	Serial.println("(2):Set LED 1-16 individually with values from 0-4095.");
 	Serial.println("(3):Turn on 8 LEDs with polarization filter. Set Brightness from 0-255.");
 	Serial.println("(4):Turn on 8 LEDs without polarization filter. Set Brightness from 0-255.");

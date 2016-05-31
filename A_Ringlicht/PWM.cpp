@@ -51,10 +51,14 @@ void PWM::Reset(void)
 	//OCR2A = 0x0;
 }
 
+// Arduino UNO: 
+// Timer0 8bit (__delay()__, __millis()__ and __micros()__)
+// Timer1 16bit ( __Servo library__) --> used for PWM
+// Timer2 8bit ( __tone()__)
 void PWM::Init(void)
 {
-	pinMode(m_pwm_Channel_nonPol, OUTPUT);	// ( TIMER2A )
-	pinMode(m_pwmChannel_Pol, OUTPUT);		// ( TIMER1A )
+	pinMode(m_pwm_Channel_nonPol, OUTPUT);	// ( TIMER1A )
+	pinMode(m_pwmChannel_Pol, OUTPUT);		// ( TIMER1B )
 	
 	/*
 	TCCR1B = TCCR1B & 0b11111000 | 0x01;	// No Prescaling

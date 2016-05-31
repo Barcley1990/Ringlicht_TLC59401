@@ -67,7 +67,6 @@ Driver::Driver(uint8_t n, uint8_t c, uint8_t d, uint8_t l, uint8_t m)
 
   pwmbuffer = (uint16_t *)calloc(2, 16*n);
 }
-
 /*
 The TLC59401 can adjust the brightness of each channel OUTn using a PWM control scheme. The use of 12
 bits per channel results in 4096 different brightness steps, from 0% to 100% brightness.
@@ -80,61 +79,44 @@ The complete grayscale data format consists of 16x12 bit words, which forms a 19
 The data packet must be clocked in MSB first.
 */
 
-#define MODE	2	// GS or DC mode
-#define XERR	3	// Reports the error flags
-#define DATA    4	// Serial Data In (SIN)
-#define SCLK	5	// Serial Clock (SCLK)
-#define LATCH   6	// Latch (XLAT)
-#define BLANK	7	// set to -1 to not use the enable pin (its optional).
-#define GCLK	8
-
 // The TLC59401 compares the grayscale
 // value of each output OUTn with the grayscale counter value.
 
 void Driver::write(void) 
 {
+	cli();	
 	// Disable outputs
-	digitalWrite(BLANK, LOW);
+	BLANK_LOW;
 	
 	// Clock in data
-	digitalWrite(_lat, LOW);
+	LATCH_LOW;
 	// 16 channels per TLC59401
 	for (int i=16*numdrivers-1; i>=0 ; i--) {
 		// 12 bits per channel, send MSB first
 		for (int j=11; j>=0; j--) {
-			digitalWrite(_clk, LOW);					
+			SCLK_LOW;				
 			if (pwmbuffer[i] & (1 << j))
-				digitalWrite(_dat, HIGH);
+				DATA_HIGH;
 			else
-				digitalWrite(_dat, LOW);
-			digitalWrite(_clk, HIGH);			
+				DATA_LOW;
+			SCLK_HIGH;		
 		}
 	}
-	digitalWrite(_clk, LOW);
+	SCLK_LOW;
 	// end of clocking in  
 
 	// latch the serial data into the grayscale register. New grayscale data immediately become valid at the rising edge of the XLAT
 	// signal; therefore, new grayscale data should be latched at the end of a grayscale cycle when BLANK is high.
-	digitalWrite(_lat, HIGH); 
-	digitalWrite(_lat, LOW);
+	LATCH_HIGH;
+	LATCH_LOW;
 	// end of latching in
 	
-	digitalWrite(BLANK, HIGH);
-	for(int p=0;p<4096;p++){
-		digitalWrite(GCLK, HIGH);
-		digitalWrite(GCLK, LOW);
-	}
-}
-
-void Driver::update()
-{
-	
+	BLANK_HIGH;
+	sei();
 }
 
 void Driver::setDotCorrection()
-{
-	setMode(DC);
-		
+{	
 	digitalWrite(_lat, LOW);
 	for (int i=0; i<96; i++)
 	{
@@ -144,12 +126,6 @@ void Driver::setDotCorrection()
 	}
 	digitalWrite(_lat, HIGH);
 	digitalWrite(_lat, LOW);
-
-	// The first GS data input cycle after dot correction requires an additional SCLK pulse after the XLAT signal to complete
-	// the grayscale update cycle.
-	digitalWrite(_clk, HIGH);
-	digitalWrite(_clk, LOW);
-	
 }
 
 void Driver::setPWM(uint8_t chan, uint16_t pwm) 
@@ -187,18 +163,6 @@ void Driver::setPWM(uint8_t chan, uint16_t pwm)
   pwmbuffer[ch+3] = pwm;
 }
 
-void Driver::test()
-{
-	for (uint8_t i=1; i<=16; i++)
-	{
-		setPWM(i, 1000);
-		write();
-		delay(500);
-		setPWM(i, 0);
-	}
-	
-}
-
 boolean Driver::begin() 
 {
   if (!pwmbuffer){
@@ -210,12 +174,55 @@ boolean Driver::begin()
   pinMode(_dat, OUTPUT);
   pinMode(_lat, OUTPUT);
   pinMode(_mod, OUTPUT); 
+  pinMode(GCLK, OUTPUT);
   digitalWrite(_lat, LOW);
-  // setting  GS mode
-  digitalWrite(_mod, LOW);
-
+  // setting DC mode
+  setMode(DC);
+  setDotCorrection();
+  // setting  GS mode and do the first cycle
+  setMode(GS);
+  reset_all(); // clear buffer
+  write();
+  // The first GS data input cycle after dot correction requires an additional SCLK pulse after the XLAT signal to complete
+  // the grayscale update cycle
+  digitalWrite(_clk, HIGH);
+  digitalWrite(_clk, LOW);
+  
+  
+  /* Set up timer/counter2A, update frequency 100Hz */
+  
+  // TCCR2A – Timer/Counter Control Register A
+  // TCCR2A = COM2A1 COM2A0 COM2B1 COM2B0 – – WGM21 WGM20
+  // WaveformGenerationMode -> CTC Mode
+  TCCR2A = 0b00000010; 
+  
+  // TCCR2B – Timer/Counter Control Register B
+  // TCCR2B = FOC2A FOC2B – – WGM22 CS22 CS21 CS20
+  // CS22 CS21 CS20 Description
+  //  0	   0	0	No clock source (Timer/Counter stopped).
+  //  0	   0	1	clkT2S/(No prescaling)
+  //  0	   1	0	clkT2S/8 (From prescaler)
+  //  0	   1    1	clkT2S/32 (From prescaler)
+  //  1	   0    0	clkT2S/64 (From prescaler)
+  //  1    0    1   clkT2S/128 (From prescaler)
+  //  1    1    0   clkT2S/256 (From prescaler)
+  //  1    1    1   clkT2S/1024 (From prescaler)
+  TCCR2B = 0b00000010;
+  
+  // TCNT2 – Timer/Counter Register
+  TCNT2 = 0;
+  
+  // Output Compare Register B
+  OCR2A = 7;
+  
+  // TIMSK2 = – – – – – OCIE2B OCIE2A TOIE2;
+  TIMSK2 = 0b00000100;
+  
+  sei();
   return true;
 }
+
+
 
 void Driver::full_brightness()
 {
@@ -223,14 +230,12 @@ void Driver::full_brightness()
 	{
 		setPWM(i,4095);
 	}
-	write();
 }
 
 void Driver::reset_all()
 {
 	for (int i=1; i<=16; i++)
 		setPWM(i,0);
-	write();
 }
 
 // DC mode or GS mode

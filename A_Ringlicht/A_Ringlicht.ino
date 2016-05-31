@@ -15,9 +15,11 @@
  * XLAT:	PD6 -> Pin 6
  * BLANK:	PD7 -> Pin 7
  * GSCLK:	PB0 -> Pin 8
- * PWM1:	PB1 -> Pin 9 (PWM)
- * PWM2:	PB2 -> Pin 10 (PWM)
+ * PWM1:	PB1 -> Pin 9 (PWM)( TIMER1A)(OC1A)
+ * PWM2:	PB2 -> Pin 10 (PWM)( TIMER1B)(OC1B)
  */ 
+
+#define F_CPU 18432000UL
 
 #include "Driver.h"
 #include "Functions.h"
@@ -26,6 +28,7 @@
 #include <avr/interrupt.h>
 #include <stdlib.h>
 #include <avr/io.h>
+#include <util/delay.h>
 
 #define BaudRate 115200
 #define HIGH	1
@@ -35,16 +38,11 @@
 #define NUM_TLC59401 1
 #define timeout 1000	// set UART timeout in ms
 
-#define MODE	2	// GS or DC mode
-#define XERR	3	// Reports the error flags
-#define DATA    4	// Serial Data In (SIN)
-#define SCLK	5	// Serial Clock (SCLK)
-#define LATCH   6	// Latch (XLAT)
-#define BLANK	7	// set to -1 to not use the enable pin (its optional).
-#define GCLK	8
+
+
 /* N.B. The PWM is just working with this PIN configuration! */
-#define pwm_non_polarisation	9	// PWM Channel for LEDs without pol-filter ( TIMER1A )
-#define pwm_polarisation		10	// PWM Channel for LEDs with pol-filter	   ( TIMER3A )
+#define pwm_non_polarisation	9	// PWM Channel for LEDs without pol-filter 
+#define pwm_polarisation		10	// PWM Channel for LEDs with pol-filter	   
 
 // create objects
 Driver tlc = Driver(NUM_TLC59401, SCLK, DATA, LATCH, MODE);
@@ -55,6 +53,21 @@ PWM pwm = PWM(pwm_non_polarisation, pwm_polarisation);
 volatile uint8_t transmit_started = 0;
 volatile uint8_t uart_timeout = 0;
 
+
+
+int cnt=0;
+ISR(TIMER2_COMPB_vect)
+{
+	if(cnt>=4095){
+		cnt=0;
+		BLANK_LOW;
+		_delay_us(2);
+		BLANK_HIGH;
+	}
+	GCLK_HIGH;
+	GCLK_LOW;
+	cnt++;
+}
 
 void setup()
 {
@@ -80,10 +93,9 @@ void setup()
 	Serial.println("---------------------------------");
 	
 	delay(500);
-	
-	//tlc.full_brightness();
 }
 	
+// is called every main loop
 void serialEvent()
 {
 	while(Serial.available())
@@ -106,24 +118,25 @@ void serialEvent()
 
 void loop()
 {
-	//cli();
+	cli();
 	
 	// Check Error Flag (toDo)
-	
-
 
 	if(Serial.available()>0)
 		serialEvent();
 	if (ser.m_stringComplete)
 	{
 		Serial.print("got something: ");
+		
 		// check if RESET was insert	
 		if (ser.Check_Reset()){				
 			tlc.reset_all();
+			tlc.write();
 			pwm.Reset();	
 			Serial.println("+Reset");	
 		}		
 		// Print information
+		
 		else if (ser.Help());
 		// Set LEDs for shadow detection (Driver)		
 		else if(ser.Check_Input()) {	
@@ -148,14 +161,25 @@ void loop()
 		else if (ser.Toggle()){
 			Serial.println("Toggle pin");
 		}
+		
 		// String does not match anything
+		else if(ser.Check_Input()) {
+			ser.Check_LedValue();
+			// set LED
+			tlc.setPWM(ser.m_led, ser.m_val);
+			tlc.write();
+			ser.m_inputString = "";
+			ser.m_stringComplete = false;
+		}
 		else {	
 			Serial.println("String doesn't match!");
 			ser.m_inputString = "";
 			ser.m_stringComplete = false;
 		}	
 	}
-	//sei();
+	
+	
+	sei();
 }
 
 

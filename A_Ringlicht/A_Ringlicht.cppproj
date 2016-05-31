@@ -102,10 +102,9 @@
       <Value>../../A_Ringlicht</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
-      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.0.98\include</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
-  <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
   <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
   <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
   <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
@@ -136,7 +135,6 @@
       <Value>../../A_Ringlicht</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
-      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.0.98\include</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize (-O1)</avrgcccpp.compiler.optimization.level>
@@ -362,7 +360,6 @@ object_files="C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\u
       <Value>../../A_Ringlicht</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
-      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.0.98\include</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -396,7 +393,6 @@ object_files="C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\PlatinenTest\u
       <Value>../../A_Ringlicht</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
-      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.0.98\include</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize (-O1)</avrgcccpp.compiler.optimization.level>
